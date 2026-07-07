@@ -5,63 +5,35 @@ import { uploadImage } from "../../api/uploadApi/uploadApi";
 
 const ImageUpload = ({
   onUploadSuccess,
+  accept = "image/*,video/*",
+  label = "Upload media",
+  className = "",
 }) => {
+  const mutation = useMutation({
+    mutationFn: uploadImage,
+    onSuccess: (data) => {
+      toast.success("Media uploaded");
+      onUploadSuccess?.(data.imageUrl);
+    },
+    onError: () => {
+      toast.error("Upload failed");
+    },
+  });
 
-  const mutation =
-    useMutation({
-      mutationFn:
-        uploadImage,
+  const handleChange = (e) => {
+    const file = e.target.files?.[0];
 
-      onSuccess: (
-        data
-      ) => {
-
-        toast.success(
-          "Image Uploaded"
-        );
-
-        onUploadSuccess(
-          data.imageUrl
-        );
-      },
-
-      onError: () => {
-        toast.error(
-          "Upload Failed"
-        );
-      },
-    });
-
-  const handleChange =
-    (e) => {
-
-      const file =
-        e.target.files[0];
-
-      if (file) {
-        mutation.mutate(
-          file
-        );
-      }
-    };
+    if (file) {
+      mutation.mutate(file);
+    }
+  };
 
   return (
-    <div>
+    <div className={className}>
+      <label className="block text-sm font-medium text-gray-700">{label}</label>
+      <input type="file" accept={accept} onChange={handleChange} className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:rounded-full file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-700 hover:file:bg-blue-100" />
 
-      <input
-        type="file"
-        accept="image/*"
-        onChange={
-          handleChange
-        }
-      />
-
-      {mutation.isPending && (
-        <p>
-          Uploading...
-        </p>
-      )}
-
+      {mutation.isPending && <p className="mt-2 text-sm text-gray-500">Uploading...</p>}
     </div>
   );
 };

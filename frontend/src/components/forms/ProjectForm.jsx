@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import ImageUpload from "./ImageUpload";
+
 const ProjectForm = ({ onSubmit = () => {}, initialData = {}, loading = false, categories = [] }) => {
   const [formData, setFormData] = useState({
     title: initialData.title || "",
@@ -19,6 +21,8 @@ const ProjectForm = ({ onSubmit = () => {}, initialData = {}, loading = false, c
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const isVideoUrl = (value) => /\.(mp4|mov|webm|ogg|m4v)$/i.test(value || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,9 +64,19 @@ const ProjectForm = ({ onSubmit = () => {}, initialData = {}, loading = false, c
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div>
-          <label className="mb-1 block text-sm font-medium text-slate-700">Image URL</label>
-          <input name="image" value={formData.image} onChange={handleChange} placeholder="Optional image URL" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-blue-500" />
+        <div className="md:col-span-2">
+          <label className="mb-1 block text-sm font-medium text-slate-700">Media</label>
+          <div className="space-y-3">
+            <ImageUpload onUploadSuccess={(url) => setFormData((prev) => ({ ...prev, image: url }))} label="Upload a picture or video from your device" />
+            <input name="image" value={formData.image} onChange={handleChange} placeholder="Or paste an image/video URL" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-blue-500" />
+            {formData.image ? (
+              isVideoUrl(formData.image) ? (
+                <video controls src={formData.image} className="h-48 w-full rounded-lg border object-cover" />
+              ) : (
+                <img src={formData.image} alt="Project preview" className="h-48 w-full rounded-lg border object-cover" />
+              )
+            ) : null}
+          </div>
         </div>
         <div>
           <label className="mb-1 block text-sm font-medium text-slate-700">Status</label>
