@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
+import { Eye, EyeOff } from "lucide-react";
 
 import { getRoles } from "../../api/users/userApi";
 import { strongPasswordMessage, validateStrongPassword } from "../../utils/passwordRules";
 
 const UserForm = ({ onSubmit = () => {}, initialData = null, loading = false }) => {
   const isEdit = Boolean(initialData && initialData.id);
+  const [showPassword, setShowPassword] = useState(false);
 
   const { data: rolesData } = useQuery({ queryKey: ["roles"], queryFn: getRoles, enabled: true });
 
@@ -75,7 +77,21 @@ const UserForm = ({ onSubmit = () => {}, initialData = null, loading = false }) 
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Password {isEdit && <span className="text-gray-500 text-sm">(leave blank to keep current)</span>}</label>
-          <input type="password" {...register("password", { validate: validateStrongPassword })} className="mt-1 w-full border rounded p-2" />
+          <div className="relative mt-1">
+            <input
+              type={showPassword ? "text" : "password"}
+              {...register("password", { validate: validateStrongPassword })}
+              className="w-full border rounded p-2 pr-10"
+            />
+            <button
+              type="button"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
           {errors.password && <p className="text-red-600 text-sm mt-1">{errors.password.message}</p>}
           <p className="text-xs text-gray-500 mt-1">{strongPasswordMessage}</p>
         </div>
