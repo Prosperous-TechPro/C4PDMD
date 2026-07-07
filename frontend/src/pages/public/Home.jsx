@@ -850,7 +850,7 @@ const Home = () => {
                   whileHover={{ scale: 1.05 }}
                 >
                   <LazyImage
-                    src={image.imageUrl}
+                    src={image.image || image.imageUrl || image.url || ""}
                     alt={image.title || "Gallery image"}
                     className="w-full h-full object-cover group-hover:brightness-75 transition-all duration-300"
                   />
