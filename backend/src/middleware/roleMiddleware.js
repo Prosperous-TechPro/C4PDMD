@@ -22,7 +22,10 @@ const authorize = (...roles) => {
       return res.status(403).json({ success: false, message: "Account verification required" });
     }
 
-    if (roles && roles.length > 0 && !roles.includes(req.user.role)) {
+    const userRole = req.user.role;
+    const hasSuperAdminAccess = userRole === "SUPER_ADMIN";
+
+    if (roles && roles.length > 0 && !hasSuperAdminAccess && !roles.includes(userRole)) {
       return res.status(403).json({ success: false, message: "Permission denied" });
     }
 

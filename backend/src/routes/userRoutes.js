@@ -77,7 +77,7 @@ router.get("/:id", getUserById);
  * POST /api/users
  * -----------------------------------------------------
  */
-router.post("/", authenticate, authorize("Admin"), createUser);
+router.post("/", authenticate, authorize("SUPER_ADMIN", "Admin"), createUser);
 
 /**
  * -----------------------------------------------------
@@ -86,7 +86,7 @@ router.post("/", authenticate, authorize("Admin"), createUser);
  * PUT /api/users/:id
  * -----------------------------------------------------
  */
-router.put("/:id", authenticate, authorize("Admin"), updateUser);
+router.put("/:id", authenticate, authorize("SUPER_ADMIN", "Admin"), updateUser);
 
 /**
  * -----------------------------------------------------
@@ -95,7 +95,7 @@ router.put("/:id", authenticate, authorize("Admin"), updateUser);
  * DELETE /api/users/:id
  * -----------------------------------------------------
  */
-router.delete("/:id", authenticate, authorize("Admin"), deleteUser);
+router.delete("/:id", authenticate, authorize("SUPER_ADMIN", "Admin"), deleteUser);
 
 /**
  * Approve a pending user (SUPER_ADMIN only)
