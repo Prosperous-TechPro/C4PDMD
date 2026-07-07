@@ -16,6 +16,18 @@ import {
 const AuthContext =
   createContext(null);
 
+const getRoleName = (userData) => userData?.role?.name || userData?.role || "User";
+
+const canAccessDashboard = (userData) => {
+  const role = getRoleName(userData);
+  const status = userData?.status || "ACTIVE";
+  const isVerified = !!userData?.isVerified;
+  const isStaff = !!userData?.isStaff;
+  const dashboardRoles = ["SUPER_ADMIN", "Admin", "Editor"];
+
+  return dashboardRoles.includes(role) && status === "ACTIVE" && (role === "SUPER_ADMIN" || isVerified || isStaff);
+};
+
 const normalizeUser = (userData) => {
   if (!userData) return null;
 
@@ -23,7 +35,7 @@ const normalizeUser = (userData) => {
   const lastName = userData.lastName || "";
   const fullName = [firstName, lastName].filter(Boolean).join(" ").trim();
 
-  const role = userData.role?.name || userData.role || "User";
+  const role = getRoleName(userData);
   const status = userData.status || "ACTIVE";
   const isVerified = !!userData.isVerified;
   const isStaff = !!userData.isStaff;
@@ -38,10 +50,7 @@ const normalizeUser = (userData) => {
     isStaff,
     displayName: userData.displayName || fullName || userData.email || "User",
     initials: userData.initials || `${(firstName[0] || "").toUpperCase()}${(lastName[0] || "").toUpperCase()}` || "U",
-    canAccessDashboard:
-      (role === "SUPER_ADMIN" || role === "Admin" || role === "Editor") &&
-      status === "ACTIVE" &&
-      (role === "SUPER_ADMIN" ? true : isVerified),
+    canAccessDashboard: canAccessDashboard(userData),
   };
 };
 

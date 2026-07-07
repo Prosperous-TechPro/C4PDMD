@@ -65,6 +65,9 @@ const Login = () => {
       const role = user.role;
       const status = user.status || "ACTIVE";
       const isVerified = user.isVerified || false;
+      const isStaff = user.isStaff || false;
+      const dashboardRoles = ["SUPER_ADMIN", "Admin", "Editor"];
+      const canAccessDashboard = dashboardRoles.includes(role) && status === "ACTIVE" && (role === "SUPER_ADMIN" || isVerified || isStaff);
 
       if (status === "PENDING") {
         toast("Your account is pending approval or verification.");
@@ -76,11 +79,7 @@ const Login = () => {
         return navigate("/");
       }
 
-      if (status === "ACTIVE" && role === "SUPER_ADMIN") {
-        return navigate("/dashboard");
-      }
-
-      if (isVerified && ["Admin", "Editor"].includes(role)) {
+      if (canAccessDashboard) {
         return navigate("/dashboard");
       }
 

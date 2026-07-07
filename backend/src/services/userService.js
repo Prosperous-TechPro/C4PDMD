@@ -109,6 +109,18 @@ const createUser = async (userData) => {
       10
     );
 
+    const role = await prisma.role.findUnique({
+      where: {
+        id: Number(userData.roleId),
+      },
+    });
+
+    const roleName = role?.name;
+    const staffRoles = ["SUPER_ADMIN", "Admin", "Editor"];
+    const isStaffRole = roleName ? staffRoles.includes(roleName) : false;
+    const isStaff = userData.isStaff !== undefined ? Boolean(userData.isStaff) : isStaffRole;
+    const isVerified = userData.isVerified !== undefined ? Boolean(userData.isVerified) : isStaffRole;
+
     const user = await prisma.user.create({
       data: {
         firstName: userData.firstName,
@@ -117,6 +129,8 @@ const createUser = async (userData) => {
         password: hashedPassword,
         roleId: Number(userData.roleId),
         status: userData.status || "ACTIVE",
+        isStaff,
+        isVerified,
         profileImageUrl: userData.profileImageUrl || null,
         coverImageUrl: userData.coverImageUrl || null,
       },
