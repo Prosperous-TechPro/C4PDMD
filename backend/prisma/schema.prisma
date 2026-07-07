@@ -16,15 +16,17 @@ datasource db {
 // ======================================================
 
 model User {
-  id              Int     @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   firstName       String
   lastName        String
-  email           String  @unique
+  email           String    @unique
   password        String
-  status          String  @default("ACTIVE")
-  isVerified      Boolean @default(false)
-  isStaff         Boolean @default(false)
-  phoneNumber     String? @unique
+  status          String    @default("ACTIVE")
+  isVerified      Boolean   @default(false)
+  isStaff         Boolean   @default(false)
+  approvedBy      Int?
+  approvedAt      DateTime?
+  phoneNumber     String?   @unique
   profileImageUrl String?
   coverImageUrl   String?
 
