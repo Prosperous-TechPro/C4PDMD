@@ -36,27 +36,6 @@ const getSettings = async () => {
             "Ho, Volta Region, Ghana",
           website: "",
           logo: "",
-          favicon: "",
-          heroImage: "",
-          aboutImage: "",
-          heroTitle: "",
-          heroSubtitle: "",
-          aboutTitle: "",
-          aboutText: "",
-          storyTitle: "",
-          storySubtitle: "",
-          storyVideoOne: "",
-          storyVideoTwo: "",
-          storyVideoThree: "",
-          mission: "",
-          vision: "",
-          facebook: "",
-          linkedin: "",
-          twitter: "",
-          youtube: "",
-          instagram: "",
-          footerText:
-            "© C4PDMD. All Rights Reserved.",
         },
       });
   }
@@ -100,35 +79,6 @@ const updateSettings = async (
       website:
         data.website,
       logo: data.logo,
-      favicon:
-        data.favicon,
-      heroImage: data.heroImage,
-      aboutImage: data.aboutImage,
-      heroTitle: data.heroTitle,
-      heroSubtitle: data.heroSubtitle,
-      aboutTitle: data.aboutTitle,
-      aboutText: data.aboutText,
-      storyTitle: data.storyTitle,
-      storySubtitle: data.storySubtitle,
-      storyVideoOne: data.storyVideoOne,
-      storyVideoTwo: data.storyVideoTwo,
-      storyVideoThree: data.storyVideoThree,
-      mission:
-        data.mission,
-      vision:
-        data.vision,
-      facebook:
-        data.facebook,
-      linkedin:
-        data.linkedin,
-      twitter:
-        data.twitter,
-      youtube:
-        data.youtube,
-      instagram:
-        data.instagram,
-      footerText:
-        data.footerText,
     },
   });
 };

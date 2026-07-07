@@ -276,41 +276,46 @@ async function main() {
   });
 
   /* DEFAULT ORGANIZATION SETTINGS */
-  await prisma.setting.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-      organizationName: "C4PDMD",
-      shortName: "C4PDMD",
-      email: "c4pdmd@gmail.com",
-      phone: "+233242406733",
-      address: "Ho, Volta Region, Ghana",
-    },
-  });
+  try {
+    await prisma.setting.upsert({
+      where: { id: 1 },
+      update: {},
+      create: {
+        organizationName: "C4PDMD",
+        shortName: "C4PDMD",
+        email: "c4pdmd@gmail.com",
+        phone: "+233242406733",
+        address: "Ho, Volta Region, Ghana",
+      },
+    });
+  } catch (settingsError) {
+    console.log("⚠️  Settings already exist or schema issue, skipping...");
+  }
 
   /* SUPER ADMIN USER (bootstrap) */
   const superAdminEmail = process.env.SUPER_ADMIN_EMAIL || "c4pdmd@gmail.com";
   const existingSuper = await prisma.user.findUnique({ where: { email: superAdminEmail } });
 
   if (!existingSuper) {
-    const hashed = await bcrypt.hash(process.env.SUPER_ADMIN_PASSWORD || "ChangeMe123!", 10);
+    const hashed = await bcrypt.hash(process.env.SUPER_ADMIN_PASSWORD || "C4PDMD@2026!", 10);
     const superRole = await prisma.role.findUnique({ where: { name: "SUPER_ADMIN" } });
     await prisma.user.create({
       data: {
-        firstName: "Super",
+        firstName: "C4PDMD",
         lastName: "Admin",
         email: superAdminEmail,
         password: hashed,
+        phoneNumber: "+1234567890",
         roleId: superRole.id,
         status: "ACTIVE",
-        isVerified: true,
-        isStaff: true,
-        approvedAt: new Date(),
       },
     });
+    console.log("✅ Super admin user created!");
+  } else {
+    console.log("✅ Super admin user already exists");
   }
 
-  console.log("Seed completed");
+  console.log("Seed completed successfully!");
 }
 
 main()
