@@ -10,6 +10,8 @@ import { Navigate } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthContext";
 
+const normalizeRoleName = (role) => String(role || "").trim().toUpperCase().replace(/\s+/g, "_");
+
 const RoleProtectedRoute = ({
   children,
   roles = [],
@@ -34,20 +36,7 @@ const RoleProtectedRoute = ({
         ? [role]
         : []),
     ]),
-  ];
-
-  /**
-   * ======================================
-   * LOADING
-   * ======================================
-   */
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-
-        <div className="text-center">
-
+  ].map(normalizeRoleName);
           <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
 
           <p className="mt-4 text-gray-600">
@@ -92,7 +81,9 @@ const RoleProtectedRoute = ({
     return <Navigate to="/" replace />;
   }
 
-  if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+  const normalizedUserRole = normalizeRoleName(user?.role);
+
+  if (allowedRoles.length > 0 && !allowedRoles.includes(normalizedUserRole)) {
     return <Navigate to="/" replace />;
   }
 

@@ -63,11 +63,12 @@ const Login = () => {
       // Handle role/status-based redirects
       const user = response.user || {};
       const role = user.role;
+      const normalizedRole = String(role || "").trim().toUpperCase().replace(/\s+/g, "_");
       const status = user.status || "ACTIVE";
       const isVerified = user.isVerified || false;
       const isStaff = user.isStaff || false;
-      const dashboardRoles = ["SUPER_ADMIN", "Admin", "Editor"];
-      const canAccessDashboard = dashboardRoles.includes(role) && status === "ACTIVE" && (role === "SUPER_ADMIN" || isVerified || isStaff);
+      const dashboardRoles = ["SUPER_ADMIN", "ADMIN", "EDITOR"];
+      const canAccessDashboard = dashboardRoles.includes(normalizedRole) && status === "ACTIVE" && (normalizedRole === "SUPER_ADMIN" || isVerified || isStaff);
 
       if (status === "PENDING") {
         toast("Your account is pending approval or verification.");

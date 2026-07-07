@@ -6,6 +6,8 @@
  * =====================================================
  */
 
+const normalizeRoleName = (role) => String(role || "").trim().toUpperCase().replace(/\s+/g, "_");
+
 const authorize = (...roles) => {
   return (req, res, next) => {
     if (!req.user) {
@@ -22,10 +24,11 @@ const authorize = (...roles) => {
       return res.status(403).json({ success: false, message: "Account verification required" });
     }
 
-    const userRole = req.user.role;
+    const userRole = normalizeRoleName(req.user.role);
+    const allowedRoles = roles.map(normalizeRoleName);
     const hasSuperAdminAccess = userRole === "SUPER_ADMIN";
 
-    if (roles && roles.length > 0 && !hasSuperAdminAccess && !roles.includes(userRole)) {
+    if (roles && roles.length > 0 && !hasSuperAdminAccess && !allowedRoles.includes(userRole)) {
       return res.status(403).json({ success: false, message: "Permission denied" });
     }
 

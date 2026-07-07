@@ -28,6 +28,8 @@ const canAccessDashboard = (userData) => {
   return dashboardRoles.includes(role) && status === "ACTIVE" && (role === "SUPER_ADMIN" || isVerified || isStaff);
 };
 
+const normalizeRoleName = (role) => String(role || "").trim().toUpperCase().replace(/\s+/g, "_");
+
 const normalizeUser = (userData) => {
   if (!userData) return null;
 
@@ -36,6 +38,7 @@ const normalizeUser = (userData) => {
   const fullName = [firstName, lastName].filter(Boolean).join(" ").trim();
 
   const role = getRoleName(userData);
+  const normalizedRole = normalizeRoleName(role);
   const status = userData.status || "ACTIVE";
   const isVerified = !!userData.isVerified;
   const isStaff = !!userData.isStaff;
@@ -45,6 +48,7 @@ const normalizeUser = (userData) => {
     firstName,
     lastName,
     role,
+    normalizedRole,
     status,
     isVerified,
     isStaff,
