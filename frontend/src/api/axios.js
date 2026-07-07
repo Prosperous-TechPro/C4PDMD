@@ -9,7 +9,7 @@ import axios from "axios";
 const API = axios.create({
   baseURL:
     import.meta.env.VITE_API_URL ||
-    "https://c4pdmd.onrender.com/api",
+    (import.meta.env.DEV ? "http://localhost:5000/api" : "https://c4pdmd.onrender.com/api"),
 
   headers: {
     "Content-Type": "application/json",

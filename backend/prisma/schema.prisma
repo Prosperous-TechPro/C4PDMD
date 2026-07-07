@@ -297,6 +297,31 @@ model Setting {
   address          String
   website          String?
   logo             String?
+  favicon          String?
+  heroImage        String?
+  aboutImage       String?
+  heroTitle        String?
+  heroSubtitle     String?
+  aboutTitle       String?
+  aboutText        String?   @db.Text
+  storyTitle       String?
+  storySubtitle    String?   @db.Text
+  storyVideoOne    String?
+  storyVideoTwo    String?
+  storyVideoThree  String?
+  mission          String?   @db.Text
+  vision           String?   @db.Text
+  facebook         String?
+  linkedin         String?
+  twitter          String?
+  instagram        String?
+  youtube          String?
+  footerText       String?   @db.Text
+  projectsCompleted String?
+  livesImpacted     String?
+  communitiesReached String?
+  activeVolunteers  String?
+  yearsOfExperience String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

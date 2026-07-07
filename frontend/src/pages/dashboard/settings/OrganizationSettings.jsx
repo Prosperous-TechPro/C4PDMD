@@ -60,6 +60,11 @@ const OrganizationSettings = () => {
       instagram: "",
       youtube: "",
       footerText: "",
+      projectsCompleted: "",
+      livesImpacted: "",
+      communitiesReached: "",
+      activeVolunteers: "",
+      yearsOfExperience: "",
     });
 
   /**
@@ -169,6 +174,21 @@ const OrganizationSettings = () => {
 
         footerText:
           data.data.footerText || "",
+
+        projectsCompleted:
+          data.data.projectsCompleted || "",
+
+        livesImpacted:
+          data.data.livesImpacted || "",
+
+        communitiesReached:
+          data.data.communitiesReached || "",
+
+        activeVolunteers:
+          data.data.activeVolunteers || "",
+
+        yearsOfExperience:
+          data.data.yearsOfExperience || "",
         });
       }, 0);
 
@@ -838,6 +858,92 @@ const OrganizationSettings = () => {
                 className="w-full border rounded-lg p-3"
               />
 
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* ========================================= */}
+        {/* IMPACT STATISTICS */}
+        {/* ========================================= */}
+
+        <div className="bg-white rounded-xl shadow border p-6">
+
+          <h2 className="text-xl font-semibold mb-6">
+            Home Page Impact Statistics
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-6">
+
+            <div>
+              <label className="block mb-2 font-medium">
+                Projects Completed
+              </label>
+              <input
+                type="text"
+                name="projectsCompleted"
+                value={formData.projectsCompleted}
+                onChange={handleChange}
+                className="w-full border rounded-lg p-3"
+                placeholder="250+"
+              />
+            </div>
+
+            <div>
+              <label className="block mb-2 font-medium">
+                Lives Impacted
+              </label>
+              <input
+                type="text"
+                name="livesImpacted"
+                value={formData.livesImpacted}
+                onChange={handleChange}
+                className="w-full border rounded-lg p-3"
+                placeholder="25,000+"
+              />
+            </div>
+
+            <div>
+              <label className="block mb-2 font-medium">
+                Communities Reached
+              </label>
+              <input
+                type="text"
+                name="communitiesReached"
+                value={formData.communitiesReached}
+                onChange={handleChange}
+                className="w-full border rounded-lg p-3"
+                placeholder="50+"
+              />
+            </div>
+
+            <div>
+              <label className="block mb-2 font-medium">
+                Active Volunteers
+              </label>
+              <input
+                type="text"
+                name="activeVolunteers"
+                value={formData.activeVolunteers}
+                onChange={handleChange}
+                className="w-full border rounded-lg p-3"
+                placeholder="98"
+              />
+            </div>
+
+            <div>
+              <label className="block mb-2 font-medium">
+                Years of Experience
+              </label>
+              <input
+                type="text"
+                name="yearsOfExperience"
+                value={formData.yearsOfExperience}
+                onChange={handleChange}
+                className="w-full border rounded-lg p-3"
+                placeholder="15+"
+              />
             </div>
 
           </div>

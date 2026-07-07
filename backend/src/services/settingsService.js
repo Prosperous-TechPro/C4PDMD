@@ -7,6 +7,7 @@
  */
 
 const { prisma } = require("../config/database");
+const { normalizeSettingsPayload } = require("./settingsPayload");
 
 /**
  * =====================================================
@@ -24,7 +25,7 @@ const getSettings = async () => {
   if (!settings) {
     settings =
       await prisma.setting.create({
-        data: {
+        data: normalizeSettingsPayload({
           organizationName:
             "Center for Prim-Data Measurement and Development",
           shortName: "C4PDMD",
@@ -36,11 +37,36 @@ const getSettings = async () => {
             "Ho, Volta Region, Ghana",
           website: "",
           logo: "",
-        },
+          favicon: "",
+          heroImage: "",
+          aboutImage: "",
+          heroTitle: "",
+          heroSubtitle: "",
+          aboutTitle: "",
+          aboutText: "",
+          storyTitle: "",
+          storySubtitle: "",
+          storyVideoOne: "",
+          storyVideoTwo: "",
+          storyVideoThree: "",
+          mission: "",
+          vision: "",
+          facebook: "",
+          linkedin: "",
+          twitter: "",
+          instagram: "",
+          youtube: "",
+          footerText: "",
+          projectsCompleted: "250+",
+          livesImpacted: "25,000+",
+          communitiesReached: "50+",
+          activeVolunteers: "98",
+          yearsOfExperience: "15+",
+        }),
       });
   }
 
-  return settings;
+  return normalizeSettingsPayload(settings);
 };
 
 /**
@@ -62,24 +88,14 @@ const updateSettings = async (
       });
   }
 
+  const normalizedData = normalizeSettingsPayload(data);
+
   return await prisma.setting.update({
     where: {
       id: settings.id,
     },
 
-    data: {
-      organizationName:
-        data.organizationName,
-      shortName:
-        data.shortName,
-      email: data.email,
-      phone: data.phone,
-      address:
-        data.address,
-      website:
-        data.website,
-      logo: data.logo,
-    },
+    data: normalizedData,
   });
 };
 

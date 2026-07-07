@@ -15,9 +15,8 @@ const {
   updateSettings,
 } = require("../controllers/settingsController");
 
-// Optional middleware (uncomment when authentication is ready)
-// const authenticate = require("../middleware/authMiddleware");
-// const authorize = require("../middleware/roleMiddleware");
+const authenticate = require("../middleware/authMiddleware");
+const authorize = require("../middleware/roleMiddleware");
 
 /**
  * =====================================================
@@ -48,8 +47,8 @@ router.get(
 
 router.put(
   "/",
-  // authenticate,
-  // authorize("Admin"),
+  authenticate,
+  authorize("SUPER_ADMIN", "Admin"),
   updateSettings
 );
 

@@ -6,7 +6,7 @@ const LazyImage = ({ src, alt = "", className = "", placeholder = null }) => {
   return (
     <div className={`overflow-hidden ${className}`}>
       {!loaded && (
-        <div className="bg-gray-100 animate-pulse w-full h-full" />
+        <div className="bg-slate-200 w-full h-full" />
       )}
 
       <img
@@ -15,7 +15,7 @@ const LazyImage = ({ src, alt = "", className = "", placeholder = null }) => {
         loading="lazy"
         decoding="async"
         onLoad={() => setLoaded(true)}
-        className={`w-full h-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`w-full h-full object-cover transition-opacity duration-200 ${loaded ? "opacity-100" : "opacity-0"}`}
       />
 
       {placeholder}

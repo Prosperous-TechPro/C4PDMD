@@ -147,11 +147,26 @@ const Home = () => {
 
   // Impact statistics
   const stats = [
-    { label: "Projects Completed", value: "250+" },
-    { label: "Lives Impacted", value: "25,000+" },
-    { label: "Communities Reached", value: "50+" },
-    { label: "Active Volunteers", value: "98" },
-    { label: "Years of Experience", value: "15+" },
+    {
+      label: "Projects Completed",
+      value: organization?.projectsCompleted || "250+",
+    },
+    {
+      label: "Lives Impacted",
+      value: organization?.livesImpacted || "25,000+",
+    },
+    {
+      label: "Communities Reached",
+      value: organization?.communitiesReached || "50+",
+    },
+    {
+      label: "Active Volunteers",
+      value: organization?.activeVolunteers || "98",
+    },
+    {
+      label: "Years of Experience",
+      value: organization?.yearsOfExperience || "15+",
+    },
   ];
 
   const serviceFallbackImages = [
