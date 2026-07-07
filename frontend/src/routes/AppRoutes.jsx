@@ -114,6 +114,10 @@ const EditDonation = lazy(() => import("../pages/dashboard/donations/EditDonatio
 const ContactsManagement = lazy(() => import("../pages/dashboard/contacts/ContactsManagement"));
 const EditContact = lazy(() => import("../pages/dashboard/contacts/EditContact"));
 
+/* ================= MESSAGES ================= */
+
+const MessagesManagement = lazy(() => import("../pages/dashboard/messages/MessagesManagement"));
+
 /* ================= SETTINGS ================= */
 
 const AccountSettings = lazy(() => import("../pages/dashboard/settings/AccountSettings"));
@@ -384,6 +388,13 @@ const AppRoutes = () => {
           <Route
             path="contacts/edit/:id"
             element={<EditContact />}
+          />
+
+          {/* MESSAGES */}
+
+          <Route
+            path="messages"
+            element={<MessagesManagement />}
           />
 
           {/* ================= ACCOUNT SETTINGS ================= */}

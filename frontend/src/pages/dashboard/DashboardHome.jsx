@@ -117,6 +117,97 @@ const DashboardHome = () => {
     day: "numeric",
   });
 
+  const dashboardCards = [
+    {
+      title: "Users",
+      value: stats.totalUsers ?? 0,
+      icon: <Users />,
+      color: "bg-blue-600",
+      route: "/dashboard/users",
+      buttonLabel: "Manage Users",
+    },
+    {
+      title: "Team",
+      value: stats.totalTeamMembers ?? 0,
+      icon: <Briefcase />,
+      color: "bg-green-600",
+      route: "/dashboard/team",
+      buttonLabel: "Manage Team",
+    },
+    {
+      title: "Projects",
+      value: stats.totalProjects ?? 0,
+      icon: <FolderKanban />,
+      color: "bg-purple-600",
+      route: "/dashboard/projects",
+      buttonLabel: "Manage Projects",
+    },
+    {
+      title: "Services",
+      value: stats.totalServices ?? 0,
+      icon: <Wrench />,
+      color: "bg-orange-600",
+      route: "/dashboard/services",
+      buttonLabel: "Manage Services",
+    },
+    {
+      title: "Blogs",
+      value: stats.totalBlogPosts ?? 0,
+      icon: <Newspaper />,
+      color: "bg-indigo-600",
+      route: "/dashboard/blogs",
+      buttonLabel: "Manage Blogs",
+    },
+    {
+      title: "Gallery",
+      value: stats.totalGalleryImages ?? 0,
+      icon: <Image />,
+      color: "bg-pink-600",
+      route: "/dashboard/gallery",
+      buttonLabel: "Manage Gallery",
+    },
+    {
+      title: "Volunteers",
+      value: stats.totalVolunteers ?? 0,
+      icon: <HeartHandshake />,
+      color: "bg-cyan-600",
+      route: "/dashboard/volunteers",
+      buttonLabel: "Manage Volunteers",
+    },
+    {
+      title: "Donations",
+      value: `GH₵ ${stats.totalDonationAmount ?? 0}`,
+      icon: <HandCoins />,
+      color: "bg-emerald-600",
+      route: "/dashboard/donations",
+      buttonLabel: "Manage Donations",
+    },
+    {
+      title: "Partners",
+      value: stats.totalPartners ?? 0,
+      icon: <Handshake />,
+      color: "bg-yellow-600",
+      route: "/dashboard/partners",
+      buttonLabel: "Manage Partners",
+    },
+    {
+      title: "Testimonials",
+      value: stats.totalTestimonials ?? 0,
+      icon: <FileText />,
+      color: "bg-red-600",
+      route: "/dashboard/testimonials",
+      buttonLabel: "Manage Testimonials",
+    },
+    {
+      title: "Messages",
+      value: stats.totalMessages ?? 0,
+      icon: <MessageSquare />,
+      color: "bg-slate-700",
+      route: "/dashboard/messages",
+      buttonLabel: "Manage Messages",
+    },
+  ];
+
   /**
    * =====================================================
    * PAGE
@@ -247,84 +338,17 @@ const DashboardHome = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <StatsCard
-          title="Users"
-          value={stats.totalUsers}
-          icon={<Users />}
-          color="bg-blue-600"
-        />
-
-        <StatsCard
-          title="Team"
-          value={stats.totalTeamMembers}
-          icon={<Briefcase />}
-          color="bg-green-600"
-        />
-
-        <StatsCard
-          title="Projects"
-          value={stats.totalProjects}
-          icon={<FolderKanban />}
-          color="bg-purple-600"
-        />
-
-        <StatsCard
-          title="Services"
-          value={stats.totalServices}
-          icon={<Wrench />}
-          color="bg-orange-600"
-        />
-
-        <StatsCard
-          title="Blogs"
-          value={stats.totalBlogPosts}
-          icon={<Newspaper />}
-          color="bg-indigo-600"
-        />
-
-        <StatsCard
-          title="Gallery"
-          value={stats.totalGalleryImages}
-          icon={<Image />}
-          color="bg-pink-600"
-        />
-
-        <StatsCard
-          title="Volunteers"
-          value={stats.totalVolunteers}
-          icon={<HeartHandshake />}
-          color="bg-cyan-600"
-        />
-
-        <StatsCard
-          title="Donations"
-          value={`GH₵ ${stats.totalDonationAmount}`}
-          icon={<HandCoins />}
-          color="bg-emerald-600"
-        />
-
-        <StatsCard
-          title="Partners"
-          value={stats.totalPartners}
-          icon={<Handshake />}
-          color="bg-yellow-600"
-        />
-
-        <StatsCard
-          title="Testimonials"
-          value={stats.totalTestimonials}
-          icon={<FileText />}
-          color="bg-red-600"
-        />
-
-        <StatsCard
-          title="Messages"
-          value={stats.totalMessages}
-          icon={<MessageSquare />}
-          color="bg-slate-700"
-        />
-
+        {dashboardCards.map((card) => (
+          <StatsCard
+            key={card.title}
+            title={card.title}
+            value={card.value}
+            icon={card.icon}
+            color={card.color}
+            route={card.route}
+            buttonLabel={card.buttonLabel}
+          />
+        ))}
       </div>
 
       {/* ====================================== */}
