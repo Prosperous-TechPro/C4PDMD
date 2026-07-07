@@ -62,7 +62,13 @@ const configuredOrigins = (process.env.CORS_ORIGIN || "")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
-const defaultOrigins = ["http://localhost:3000", "http://localhost:5173", "http://localhost:5174"];
+const defaultOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://c4-pdmd.vercel.app",
+  "https://c4pdmd.onrender.com",
+];
 const allowedOrigins = Array.from(new Set([...configuredOrigins, ...defaultOrigins]));
 
 const isAllowedOrigin = (origin) => {
