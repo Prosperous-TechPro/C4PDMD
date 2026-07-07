@@ -16,15 +16,17 @@ const TeamForm = ({ onSubmit = () => {}, initialData = {}, loading = false }) =>
   });
 
   useEffect(() => {
-    if (initialData) {
-      reset({
-        name: initialData.name || "",
-        position: initialData.position || "",
-        biography: initialData.biography || "",
-        image: initialData.image || "",
-      });
+    if (!initialData || !initialData.id) {
+      return;
     }
-  }, [initialData, reset]);
+
+    reset({
+      name: initialData.name || "",
+      position: initialData.position || "",
+      biography: initialData.biography || "",
+      image: initialData.image || "",
+    });
+  }, [initialData?.id, initialData?.name, initialData?.position, initialData?.biography, initialData?.image, reset]);
 
   const imageValue = watch("image");
   const isVideoUrl = (value) => /\.(mp4|mov|webm|ogg|m4v)$/i.test(value || "");

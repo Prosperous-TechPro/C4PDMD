@@ -16,15 +16,17 @@ const ServiceForm = ({ onSubmit = () => {}, initialData = {}, loading = false })
   });
 
   useEffect(() => {
-    if (initialData) {
-      reset({
-        title: initialData.title || "",
-        description: initialData.description || "",
-        image: initialData.image || "",
-        status: initialData.status || "ACTIVE",
-      });
+    if (!initialData || !initialData.id) {
+      return;
     }
-  }, [initialData, reset]);
+
+    reset({
+      title: initialData.title || "",
+      description: initialData.description || "",
+      image: initialData.image || "",
+      status: initialData.status || "ACTIVE",
+    });
+  }, [initialData?.id, initialData?.title, initialData?.description, initialData?.image, initialData?.status, reset]);
 
   const imageValue = watch("image");
   const isVideoUrl = (value) => /\.(mp4|mov|webm|ogg|m4v)$/i.test(value || "");
