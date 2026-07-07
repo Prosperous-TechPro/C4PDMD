@@ -44,6 +44,13 @@ import heroUser from "../../assets/blue.jpeg";
 import volunteerBg from "../../assets/images/green.jpeg";
 import donationBg from "../../assets/images/red.jpeg";
 import blueBg from "../../assets/images/blue.jpeg";
+import educationBg from "../../assets/images/research.jpeg";
+import healthBg from "../../assets/images/health.jpeg";
+import livelihoodBg from "../../assets/images/livelihood.jpeg";
+import environmentBg from "../../assets/images/environment.jpeg";
+import waterBg from "../../assets/images/water.jpeg";
+import communityBg from "../../assets/images/community.jpeg";
+import visionMissionBg from "../../assets/images/visionMission.jpeg";
 
 // Animation variants
 const fadeInUp = {
@@ -160,41 +167,41 @@ const Home = () => {
       title: "Education",
       description:
         "Empowering youth through quality learning opportunities",
-      image: "https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
+      image: educationBg,
     },
     {
       icon: "❤️",
       title: "Health",
       description:
         "Providing accessible healthcare services to underserved communities",
-      image: "https://images.pexels.com/photos/7974372/pexels-photo-7974372.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
+      image: healthBg,
     },
     {
       icon: "🏠",
       title: "Livelihood",
       description:
         "Creating economic opportunities for sustainable living",
-      image: "https://images.pexels.com/photos/5632401/pexels-photo-5632401.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
+      image: livelihoodBg,
     },
     {
       icon: "🌍",
       title: "Environment",
       description:
         "Protecting natural resources for future generations",
-      image: "https://images.pexels.com/photos/1618519/pexels-photo-1618519.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
+      image: environmentBg,
     },
     {
       icon: "💧",
       title: "Water & Sanitation",
       description: "Ensuring clean water and sanitation for all",
-      image: "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
+      image: waterBg,
     },
     {
       icon: "🤝",
       title: "Community Development",
       description:
         "Building stronger, more resilient communities",
-      image: "https://images.pexels.com/photos/3584994/pexels-photo-3584994.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
+      image: communityBg,
     },
   ];
 
@@ -398,7 +405,7 @@ const Home = () => {
               className="rounded-lg overflow-hidden h-96 shadow-xl"
             >
               <LazyImage
-                src={organization?.aboutImage || "/images/ghana-education.svg"}
+                src={organization?.aboutImage || visionMissionBg}
                 alt="Community development and outreach work"
                 className="w-full h-full object-cover"
               />
