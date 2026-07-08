@@ -18,7 +18,7 @@ import {
   MapPin,
   Briefcase,
 } from "lucide-react";
-import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
 import { getTeamMembers } from "../../api/team/teamApi";
 import PageLoader from "../../components/loaders/PageLoader";
@@ -66,11 +66,13 @@ const Team = () => {
   const members = data?.data || [];
 
   const filteredMembers = members.filter((member) => {
+    const biography = member.biography || member.bio || "";
+
     return (
       member.name?.toLowerCase().includes(search.toLowerCase()) ||
       member.position?.toLowerCase().includes(search.toLowerCase()) ||
       member.department?.toLowerCase().includes(search.toLowerCase()) ||
-      member.bio?.toLowerCase().includes(search.toLowerCase())
+      biography.toLowerCase().includes(search.toLowerCase())
     );
   });
 
@@ -244,22 +246,23 @@ const Team = () => {
                       </p>
                     )}
 
-                    {member.bio && (
+                    {member.biography || member.bio ? (
                       <p className="text-gray-600 text-xs mt-3 line-clamp-2">
-                        {member.bio}
+                        {member.biography || member.bio}
                       </p>
-                    )}
+                    ) : null}
 
                     {/* Social Links Preview */}
-                    <div className="flex gap-3 mt-4">
+                    <div className="flex flex-wrap gap-2 mt-4">
                       {member.email && (
                         <motion.a
                           href={`mailto:${member.email}`}
-                          className="text-gray-400 hover:text-indigo-700 transition"
-                          whileHover={{ scale: 1.2 }}
+                          className="inline-flex items-center gap-1 rounded-full border border-indigo-100 bg-indigo-50 px-2.5 py-1 text-[11px] font-medium text-indigo-700 transition"
+                          whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          <Mail size={16} />
+                          <Mail size={12} />
+                          Email
                         </motion.a>
                       )}
                       {member.linkedin && (
@@ -267,11 +270,12 @@ const Team = () => {
                           href={member.linkedin}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-gray-400 hover:text-blue-600 transition"
-                          whileHover={{ scale: 1.2 }}
+                          className="inline-flex items-center gap-1 rounded-full border border-blue-100 bg-blue-50 px-2.5 py-1 text-[11px] font-medium text-blue-700 transition"
+                          whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          <FaLinkedin size={16} />
+                          <FaLinkedin size={12} />
+                          LinkedIn
                         </motion.a>
                       )}
                       {member.twitter && (
@@ -279,11 +283,12 @@ const Team = () => {
                           href={member.twitter}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-gray-400 hover:text-blue-400 transition"
-                          whileHover={{ scale: 1.2 }}
+                          className="inline-flex items-center gap-1 rounded-full border border-sky-100 bg-sky-50 px-2.5 py-1 text-[11px] font-medium text-sky-700 transition"
+                          whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          <FaTwitter size={16} />
+                          <FaTwitter size={12} />
+                          X
                         </motion.a>
                       )}
                       {member.facebook && (
@@ -291,11 +296,25 @@ const Team = () => {
                           href={member.facebook}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-gray-400 hover:text-blue-700 transition"
-                          whileHover={{ scale: 1.2 }}
+                          className="inline-flex items-center gap-1 rounded-full border border-blue-100 bg-blue-50 px-2.5 py-1 text-[11px] font-medium text-blue-700 transition"
+                          whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          <FaFacebook size={16} />
+                          <FaFacebook size={12} />
+                          Facebook
+                        </motion.a>
+                      )}
+                      {member.whatsapp && (
+                        <motion.a
+                          href={member.whatsapp}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 rounded-full border border-green-100 bg-green-50 px-2.5 py-1 text-[11px] font-medium text-green-700 transition"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaWhatsapp size={12} />
+                          WhatsApp
                         </motion.a>
                       )}
                     </div>
@@ -402,6 +421,18 @@ const Team = () => {
                         <FaFacebook size={20} />
                       </motion.a>
                     )}
+                    {selectedMember.whatsapp && (
+                      <motion.a
+                        href={selectedMember.whatsapp}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center justify-center w-12 h-12 bg-gray-100 hover:bg-green-100 text-gray-600 hover:text-green-600 rounded-full transition"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <FaWhatsapp size={20} />
+                      </motion.a>
+                    )}
                   </div>
                 </div>
 
@@ -422,10 +453,10 @@ const Team = () => {
                     </div>
                   )}
 
-                  {selectedMember.bio && (
+                  {(selectedMember.biography || selectedMember.bio) && (
                     <div className="mb-6 pb-6 border-b border-gray-200">
                       <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-                        {selectedMember.bio}
+                        {selectedMember.biography || selectedMember.bio}
                       </p>
                     </div>
                   )}

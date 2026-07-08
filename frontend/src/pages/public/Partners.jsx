@@ -18,6 +18,12 @@ import PageLoader from "../../components/loaders/PageLoader";
 import ErrorMessage from "../../components/common/ErrorMessage";
 
 const Partners = () => {
+  const socialLinks = (partner) => [
+    { label: "LinkedIn", url: partner.linkedin },
+    { label: "Facebook", url: partner.facebook },
+    { label: "X", url: partner.twitter },
+    { label: "WhatsApp", url: partner.whatsapp },
+  ].filter((item) => item.url);
   /**
    * =====================================================
    * STATE
@@ -190,31 +196,40 @@ const Partners = () => {
 
                     </h3>
 
-                    {partner.website && (
+                    {partner.description && (
+                      <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+                        {partner.description}
+                      </p>
+                    )}
 
-                      <a
-                        href={
-                          partner.website
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="
-                          mt-5
-                          inline-flex
-                          items-center
-                          gap-2
-                          text-blue-600
-                          hover:text-blue-700
-                          font-medium
-                        "
-                      >
+                    <div className="mt-5 flex flex-wrap justify-center gap-2">
+                      {partner.website && (
+                        <a
+                          href={partner.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+                        >
+                          <Globe size={18} />
+                          Visit Website
+                        </a>
+                      )}
+                    </div>
 
-                        <Globe size={18} />
-
-                        Visit Website
-
-                      </a>
-
+                    {socialLinks(partner).length > 0 && (
+                      <div className="mt-4 flex flex-wrap justify-center gap-2">
+                        {socialLinks(partner).map((link) => (
+                          <a
+                            key={link.label}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-full border border-gray-200 px-3 py-1 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-700"
+                          >
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
                     )}
 
                   </div>

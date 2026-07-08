@@ -196,6 +196,37 @@ const OrganizationSettings = () => {
 
   };
 
+  const renderVideoField = (fieldName, label, placeholder) => (
+    <div className="md:col-span-2">
+      <label className="block mb-2 font-medium">{label}</label>
+      <input
+        type="text"
+        name={fieldName}
+        value={formData[fieldName]}
+        onChange={handleChange}
+        className="w-full border rounded-lg p-3"
+        placeholder={placeholder}
+      />
+
+      <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
+        <ImageUpload
+          accept="video/*"
+          label={`Upload a video from your device for ${label}`}
+          onUploadSuccess={(url) =>
+            setFormData((prev) => ({
+              ...prev,
+              [fieldName]: url,
+            }))
+          }
+        />
+      </div>
+
+      {formData[fieldName] && (
+        <video controls src={formData[fieldName]} className="mt-3 h-48 w-full rounded-lg border object-cover" />
+      )}
+    </div>
+  );
+
   /**
    * ======================================
    * LOADING
@@ -611,47 +642,23 @@ const OrganizationSettings = () => {
               />
             </div>
 
-            <div className="md:col-span-2">
-              <label className="block mb-2 font-medium">
-                Story Video 1 URL
-              </label>
-              <input
-                type="text"
-                name="storyVideoOne"
-                value={formData.storyVideoOne}
-                onChange={handleChange}
-                className="w-full border rounded-lg p-3"
-                placeholder="https://www.youtube.com/embed/..."
-              />
-            </div>
+            {renderVideoField(
+              "storyVideoOne",
+              "Story Video 1 URL",
+              "https://www.youtube.com/embed/..."
+            )}
 
-            <div className="md:col-span-2">
-              <label className="block mb-2 font-medium">
-                Story Video 2 URL
-              </label>
-              <input
-                type="text"
-                name="storyVideoTwo"
-                value={formData.storyVideoTwo}
-                onChange={handleChange}
-                className="w-full border rounded-lg p-3"
-                placeholder="https://www.youtube.com/embed/..."
-              />
-            </div>
+            {renderVideoField(
+              "storyVideoTwo",
+              "Story Video 2 URL",
+              "https://www.youtube.com/embed/..."
+            )}
 
-            <div className="md:col-span-2">
-              <label className="block mb-2 font-medium">
-                Story Video 3 URL
-              </label>
-              <input
-                type="text"
-                name="storyVideoThree"
-                value={formData.storyVideoThree}
-                onChange={handleChange}
-                className="w-full border rounded-lg p-3"
-                placeholder="https://www.youtube.com/embed/..."
-              />
-            </div>
+            {renderVideoField(
+              "storyVideoThree",
+              "Story Video 3 URL",
+              "https://www.youtube.com/embed/..."
+            )}
 
           </div>
 

@@ -40,6 +40,10 @@ const createTeamMember = async (data) => {
       position: data.position,
       biography: data.biography,
       image: data.image || null,
+      linkedin: data.linkedin || null,
+      facebook: data.facebook || null,
+      twitter: data.twitter || null,
+      whatsapp: data.whatsapp || null,
     },
   });
 };
@@ -57,6 +61,10 @@ const updateTeamMember = async (id, data) => {
       position: data.position,
       biography: data.biography,
       image: data.image,
+      linkedin: data.linkedin || null,
+      facebook: data.facebook || null,
+      twitter: data.twitter || null,
+      whatsapp: data.whatsapp || null,
     },
   });
 };

@@ -13,6 +13,8 @@ import {
   useState,
 } from "react";
 
+import { getCurrentUser } from "../api/auth/authApi";
+
 const AuthContext =
   createContext(null);
 
@@ -90,6 +92,34 @@ export const AuthProvider = ({ children }) => {
     setUserState(nextUser);
   };
 
+  const refreshUser = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setUser(null);
+      return null;
+    }
+
+    try {
+      setLoading(true);
+      const response = await getCurrentUser();
+      const latestUser = response?.data?.data || response?.data || response?.user || null;
+
+      if (latestUser) {
+        setUser(latestUser);
+        return latestUser;
+      }
+
+      setUser(null);
+      return null;
+    } catch (error) {
+      setUser(null);
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   /**
    * ======================================
    * LOGIN
@@ -134,6 +164,7 @@ export const AuthProvider = ({ children }) => {
   const value = useMemo(() => ({
     user,
     setUser,
+    refreshUser,
     loading,
     login,
     logout,

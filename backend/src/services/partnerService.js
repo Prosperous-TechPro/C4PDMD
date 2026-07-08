@@ -67,8 +67,12 @@ const createPartner = async (data) => {
       data: {
         name: data.name,
         logo: data.logo || null,
-        website:
-          data.website || null,
+        description: data.description || null,
+        website: data.website || null,
+        linkedin: data.linkedin || null,
+        facebook: data.facebook || null,
+        twitter: data.twitter || null,
+        whatsapp: data.whatsapp || null,
       },
     });
   } catch (error) {
@@ -98,8 +102,12 @@ const updatePartner = async (
       data: {
         name: data.name,
         logo: data.logo,
-        website:
-          data.website,
+        description: data.description || null,
+        website: data.website,
+        linkedin: data.linkedin || null,
+        facebook: data.facebook || null,
+        twitter: data.twitter || null,
+        whatsapp: data.whatsapp || null,
       },
     });
   } catch (error) {

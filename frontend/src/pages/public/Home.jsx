@@ -220,6 +220,9 @@ const Home = () => {
     },
   ];
 
+  const isHostedVideoUrl = (value) =>
+    /\.(mp4|mov|webm|ogg|m4v)$/i.test(value || "") || /\/video\//i.test(value || "") || /cloudinary.*\/video\//i.test(value || "");
+
   const ghanaStories = [
     {
       title: organization?.storyTitle || "Stories from Ghana",
@@ -793,14 +796,23 @@ const Home = () => {
                 viewport={{ once: true }}
               >
                 <div className="aspect-video bg-gray-100">
-                  <iframe
-                    src={story.videoUrl}
-                    title={story.title}
-                    className="w-full h-full"
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                  {isHostedVideoUrl(story.videoUrl) ? (
+                    <video
+                      controls
+                      src={story.videoUrl}
+                      className="w-full h-full object-cover"
+                      preload="metadata"
+                    />
+                  ) : (
+                    <iframe
+                      src={story.videoUrl}
+                      title={story.title}
+                      className="w-full h-full"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  )}
                 </div>
                 <div className="p-8">
                   <div className="flex items-center text-sm text-emerald-700 font-semibold mb-3">
@@ -930,10 +942,10 @@ const Home = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  {member.photo && (
+                  {member.image && (
                     <div className="h-56 w-full rounded-lg overflow-hidden mb-4">
                       <LazyImage
-                        src={member.photo}
+                        src={member.image}
                         alt={member.name}
                         className="w-full h-full object-cover"
                       />
@@ -1066,7 +1078,7 @@ const Home = () => {
               {partners.slice(0, 5).map((partner, index) => (
                 <motion.div
                   key={partner.id}
-                  className="flex items-center justify-center p-6 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all duration-300 group"
+                  className="flex flex-col items-center justify-between p-6 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all duration-300 group"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: index * 0.05 }}
@@ -1077,13 +1089,20 @@ const Home = () => {
                     <LazyImage
                       src={partner.logo}
                       alt={partner.name}
-                      className="h-16 object-contain group-hover:scale-110 transition-transform"
+                      className="h-16 object-contain group-hover:scale-110 transition-transform mb-4"
                     />
                   ) : (
-                    <span className="text-center text-gray-600 font-semibold">
+                    <span className="text-center text-gray-600 font-semibold mb-4">
                       {partner.name}
                     </span>
                   )}
+
+                  <div className="text-center">
+                    <h3 className="font-semibold text-gray-900">{partner.name}</h3>
+                    {partner.description && (
+                      <p className="mt-2 text-sm text-gray-600 line-clamp-3">{partner.description}</p>
+                    )}
+                  </div>
                 </motion.div>
               ))}
             </div>

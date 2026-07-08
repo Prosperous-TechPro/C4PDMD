@@ -18,7 +18,7 @@ import { strongPasswordMessage, validateStrongPassword } from "../../../utils/pa
 
 const AccountSettings = () => {
 
-  const { user, logout, setUser } =
+  const { user, logout, setUser, refreshUser } =
     useAuth();
 
   const [profile, setProfile] =
@@ -84,7 +84,7 @@ const AccountSettings = () => {
 
   const profileMutation = useMutation({
     mutationFn: updateCurrentUser,
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       const updatedUser = response?.data?.data || response?.data || response?.user || null;
 
       if (updatedUser) {
@@ -94,6 +94,15 @@ const AccountSettings = () => {
         };
 
         setUser(mergedUser);
+      }
+
+      try {
+        const refreshedUser = await refreshUser();
+        if (refreshedUser) {
+          setUser(refreshedUser);
+        }
+      } catch (error) {
+        // ignore refresh failures and keep the latest local update
       }
 
       if (response?.accessToken) {
