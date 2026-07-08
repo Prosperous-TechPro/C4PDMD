@@ -67,6 +67,8 @@ const OrganizationSettings = () => {
       yearsOfExperience: "",
     });
 
+  const [hasLoadedSettings, setHasLoadedSettings] = useState(false);
+
   /**
    * ======================================
    * LOAD SETTINGS
@@ -89,112 +91,48 @@ const OrganizationSettings = () => {
 
   useEffect(() => {
 
-    if (data?.data) {
-
-      // avoid synchronous setState in effect
-      setTimeout(() => {
-        setFormData({
-        organizationName:
-          data.data.organizationName || "",
-
-        shortName:
-          data.data.shortName || "",
-
-        email:
-          data.data.email || "",
-
-        phone:
-          data.data.phone || "",
-
-        address:
-          data.data.address || "",
-
-        website:
-          data.data.website || "",
-
-        logo:
-          data.data.logo || "",
-
-        favicon:
-          data.data.favicon || "",
-
-        heroImage:
-          data.data.heroImage || "",
-
-        aboutImage:
-          data.data.aboutImage || "",
-
-        heroTitle:
-          data.data.heroTitle || "",
-
-        heroSubtitle:
-          data.data.heroSubtitle || "",
-
-        aboutTitle:
-          data.data.aboutTitle || "",
-
-        aboutText:
-          data.data.aboutText || "",
-
-        storyTitle:
-          data.data.storyTitle || "",
-
-        storySubtitle:
-          data.data.storySubtitle || "",
-
-        storyVideoOne:
-          data.data.storyVideoOne || "",
-
-        storyVideoTwo:
-          data.data.storyVideoTwo || "",
-
-        storyVideoThree:
-          data.data.storyVideoThree || "",
-
-        mission:
-          data.data.mission || "",
-
-        vision:
-          data.data.vision || "",
-
-        facebook:
-          data.data.facebook || "",
-
-        linkedin:
-          data.data.linkedin || "",
-
-        twitter:
-          data.data.twitter || "",
-
-        instagram:
-          data.data.instagram || "",
-
-        youtube:
-          data.data.youtube || "",
-
-        footerText:
-          data.data.footerText || "",
-
-        projectsCompleted:
-          data.data.projectsCompleted || "",
-
-        livesImpacted:
-          data.data.livesImpacted || "",
-
-        communitiesReached:
-          data.data.communitiesReached || "",
-
-        activeVolunteers:
-          data.data.activeVolunteers || "",
-
-        yearsOfExperience:
-          data.data.yearsOfExperience || "",
-        });
-      }, 0);
-
+    if (!data?.data || hasLoadedSettings) {
+      return;
     }
 
-  }, [data]);
+    setFormData({
+      organizationName: data.data.organizationName || "",
+      shortName: data.data.shortName || "",
+      email: data.data.email || "",
+      phone: data.data.phone || "",
+      address: data.data.address || "",
+      website: data.data.website || "",
+      logo: data.data.logo || "",
+      favicon: data.data.favicon || "",
+      heroImage: data.data.heroImage || "",
+      aboutImage: data.data.aboutImage || "",
+      heroTitle: data.data.heroTitle || "",
+      heroSubtitle: data.data.heroSubtitle || "",
+      aboutTitle: data.data.aboutTitle || "",
+      aboutText: data.data.aboutText || "",
+      storyTitle: data.data.storyTitle || "",
+      storySubtitle: data.data.storySubtitle || "",
+      storyVideoOne: data.data.storyVideoOne || "",
+      storyVideoTwo: data.data.storyVideoTwo || "",
+      storyVideoThree: data.data.storyVideoThree || "",
+      mission: data.data.mission || "",
+      vision: data.data.vision || "",
+      facebook: data.data.facebook || "",
+      linkedin: data.data.linkedin || "",
+      twitter: data.data.twitter || "",
+      instagram: data.data.instagram || "",
+      youtube: data.data.youtube || "",
+      footerText: data.data.footerText || "",
+      projectsCompleted: data.data.projectsCompleted || "",
+      livesImpacted: data.data.livesImpacted || "",
+      communitiesReached: data.data.communitiesReached || "",
+      activeVolunteers: data.data.activeVolunteers || "",
+      yearsOfExperience: data.data.yearsOfExperience || "",
+    });
+
+    setHasLoadedSettings(true);
+
+  }, [data, hasLoadedSettings]);
 
   /**
    * ======================================
@@ -235,14 +173,12 @@ const OrganizationSettings = () => {
 
   const handleChange = (e) => {
 
-    setFormData({
+    const { name, value } = e.target;
 
-      ...formData,
-
-      [e.target.name]:
-        e.target.value,
-
-    });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
   };
 
