@@ -458,7 +458,7 @@ const Services = () => {
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center bg-white text-blue-700 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center bg-pink text-blue-700 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Schedule a Consultation
               <ArrowRight className="ml-2" size={20} />

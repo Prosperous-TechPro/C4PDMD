@@ -4,7 +4,7 @@
  * =====================================================
  * Handles all User database operations.
  *
- * Author : Prosperous TechPro
+ * Author : Prosperous Tech
  * Project: C4PDMD Management System
  * =====================================================
  */

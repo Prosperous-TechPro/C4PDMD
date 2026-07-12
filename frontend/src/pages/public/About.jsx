@@ -220,7 +220,7 @@ const About = () => {
                   <Award className="text-blue-700 mr-4 mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2">
-                      15+ Years of Experience
+                      15 Years of Experience
                     </h3>
                     <p className="text-gray-600">
                       Serving communities across Africa with dedication and impact
@@ -559,7 +559,7 @@ const About = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/volunteer"
-                className="inline-flex items-center justify-center bg-white text-blue-700 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300"
+                className="inline-flex items-center justify-center bg-yellow-500 text-blue-700 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300"
               >
                 <Users className="mr-2" size={20} />
                 Volunteer

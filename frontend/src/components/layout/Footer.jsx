@@ -211,7 +211,7 @@ const Footer = () => {
 
             Designed & Developed by
             <span className="font-semibold text-white">
-              {" "}Prosperous TechPro
+              {" "}Prosperous Tech
             </span>
 
           </p>
