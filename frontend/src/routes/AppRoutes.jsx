@@ -108,6 +108,7 @@ const EditVolunteer = lazy(() => import("../pages/dashboard/volunteers/EditVolun
 
 const DonationsManagement = lazy(() => import("../pages/dashboard/donations/DonationsManagement"));
 const EditDonation = lazy(() => import("../pages/dashboard/donations/EditDonation"));
+const WithdrawalsManagement = lazy(() => import("../pages/dashboard/donations/WithdrawalsManagement"));
 
 /* ================= CONTACTS ================= */
 
@@ -371,6 +372,15 @@ const AppRoutes = () => {
           <Route
             path="donations"
             element={<DonationsManagement />}
+          />
+
+          <Route
+            path="donations/withdrawals"
+            element={
+              <RoleProtectedRoute roles={["Admin", "SUPER_ADMIN"]}>
+                <WithdrawalsManagement />
+              </RoleProtectedRoute>
+            }
           />
 
           <Route

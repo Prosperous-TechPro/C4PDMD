@@ -158,3 +158,13 @@ export const createFundMovement =
 
     return response.data;
   };
+
+export const updateFundMovement = async (id, data) => {
+  const response = await API.put(`/donations/fund-movements/${id}`, data);
+  return response.data;
+};
+
+export const printFundMovement = async (id) => {
+  const response = await API.get(`/donations/fund-movements/${id}/print`);
+  return response.data;
+};

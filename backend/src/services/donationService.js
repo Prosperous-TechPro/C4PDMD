@@ -599,7 +599,107 @@ module.exports = {
   getDonationStats,
   getAllFundMovements,
   createFundMovement,
+  getFundMovementById,
+  updateFundMovement,
+  printFundMovement,
+  getAvailableAmount,
   initiateDonationCheckout,
   verifyDonationPayment,
   handlePaystackWebhook,
+};
+
+const getFundMovementById = async (id) => {
+  try {
+    return await prisma.fundMovement.findUnique({
+      where: { id: Number(id) },
+      include: {
+        user: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
+      },
+    });
+  } catch (error) {
+    console.error("GET FUND MOVEMENT ERROR:", error);
+    throw error;
+  }
+};
+
+const getAvailableAmount = async () => {
+  const donations = await prisma.donation.findMany();
+  const totalAmount = donations.reduce((sum, d) => sum + Number(d.amount), 0);
+  const fundMovements = await prisma.$queryRaw`SELECT COALESCE(SUM("amount"), 0)::float AS "totalAmount" FROM "FundMovement"`;
+  const totalWithdrawn = Number(fundMovements?.[0]?.totalAmount || 0);
+  return Number((totalAmount - totalWithdrawn).toFixed(2));
+};
+
+const updateFundMovement = async (id, data, user) => {
+  try {
+    const movementId = Number(id);
+
+    const existing = await prisma.fundMovement.findUnique({ where: { id: movementId } });
+
+    if (!existing) {
+      const error = new Error("Fund movement not found.");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    // only allow edits within 5 minutes
+    const occurredAt = existing.occurredAt || existing.createdAt;
+    const diff = Date.now() - new Date(occurredAt).getTime();
+    const FIVE_MIN = 5 * 60 * 1000;
+    if (diff > FIVE_MIN) {
+      const error = new Error("Edit window expired. Withdrawals older than 5 minutes are read-only.");
+      error.statusCode = 403;
+      throw error;
+    }
+
+    const updateData = {};
+    if (data.amount !== undefined) updateData.amount = Number(data.amount);
+    if (data.reason !== undefined) updateData.reason = data.reason;
+
+    const updated = await prisma.fundMovement.update({
+      where: { id: movementId },
+      data: updateData,
+    });
+
+    return updated;
+  } catch (error) {
+    console.error("UPDATE FUND MOVEMENT ERROR:", error);
+    throw error;
+  }
+};
+
+const printFundMovement = async (id) => {
+  try {
+    const movement = await getFundMovementById(id);
+    if (!movement) {
+      const error = new Error("Fund movement not found.");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    const occurred = movement.occurredAt || movement.createdAt;
+    const dateStr = new Date(occurred).toLocaleString();
+
+    const pos = [];
+    pos.push("C4PDMD - Withdrawal Receipt");
+    pos.push("------------------------------");
+    pos.push(`Amount: GH₵ ${Number(movement.amount).toFixed(2)}`);
+    pos.push(`Reason: ${movement.reason || "-"}`);
+    pos.push(`Recorded By: ${movement.initiatedBy || movement.user?.email || "-"}`);
+    pos.push(`Date: ${dateStr}`);
+    pos.push("------------------------------");
+    pos.push("Thank you for supporting C4PDMD");
+
+    return { movement, pos: pos.join("\n") };
+  } catch (error) {
+    console.error("PRINT FUND MOVEMENT ERROR:", error);
+    throw error;
+  }
 };

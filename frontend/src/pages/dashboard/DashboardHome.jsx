@@ -32,6 +32,7 @@ import {
   getDashboardCharts,
   getRecentActivities,
 } from "../../api/dashboard/dashboardApi";
+import { getDonationStats } from "../../api/donations/donationApi";
 
 import StatsCard from "../../components/cards/StatsCard";
 
@@ -102,6 +103,14 @@ const DashboardHome = () => {
 
   const stats =
     statsData?.data?.overview || {};
+
+  const { data: donationStatsData } = useQuery({
+    queryKey: ["donationStats"],
+    queryFn: getDonationStats,
+    staleTime: 2000,
+  });
+
+  const availableBalance = donationStatsData?.data?.totalAmount ?? null;
 
   const charts =
     chartsData?.data || [];
@@ -191,6 +200,14 @@ const DashboardHome = () => {
       color: "bg-emerald-600",
       route: "/dashboard/donations",
       buttonLabel: "Manage Donations",
+    },
+    {
+      title: "Available Balance",
+      value: availableBalance !== null ? `GH₵ ${Number(availableBalance).toLocaleString()}` : "—",
+      icon: <HandCoins />,
+      color: "bg-rose-600",
+      route: "/dashboard/donations",
+      buttonLabel: "View Withdrawals",
     },
     {
       title: "Partners",

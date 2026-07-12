@@ -214,13 +214,59 @@ const createFundMovement = async (req, res) => {
   try {
     const movement = await donationService.createFundMovement(req.body, req.user);
 
-    return res.status(201).json({
+    // determine available amount after creation (to report insignificance if necessary)
+    const available = await donationService.getAvailableAmount();
+
+    const responsePayload = {
       success: true,
       message: "Fund movement recorded successfully.",
       data: movement,
-    });
+    };
+
+    // if movement amount exceeds available (before movement), tell user
+    if (Number(req.body.amount) > available + Number(movement.amount || 0)) {
+      responsePayload.note = "Insignificant Balance";
+    }
+
+    return res.status(201).json(responsePayload);
   } catch (error) {
     console.error("CREATE FUND MOVEMENT ERROR:", error);
+    return sendErrorResponse(res, error);
+  }
+};
+
+const getFundMovementById = async (req, res) => {
+  try {
+    const movement = await donationService.getFundMovementById(req.params.id);
+    if (!movement) {
+      return res.status(404).json({ success: false, message: "Fund movement not found." });
+    }
+
+    return res.status(200).json({ success: true, data: movement });
+  } catch (error) {
+    console.error("GET FUND MOVEMENT ERROR:", error);
+    return sendErrorResponse(res, error);
+  }
+};
+
+const updateFundMovement = async (req, res) => {
+  try {
+    const updated = await donationService.updateFundMovement(req.params.id, req.body, req.user);
+
+    return res.status(200).json({ success: true, message: "Fund movement updated successfully.", data: updated });
+  } catch (error) {
+    console.error("UPDATE FUND MOVEMENT ERROR:", error);
+    return sendErrorResponse(res, error);
+  }
+};
+
+const printFundMovement = async (req, res) => {
+  try {
+    const result = await donationService.printFundMovement(req.params.id);
+
+    return res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    console.error("PRINT FUND MOVEMENT ERROR:", error);
     return sendErrorResponse(res, error);
   }
 };

@@ -67,6 +67,27 @@ router.post(
   createFundMovement
 );
 
+router.get(
+  "/fund-movements/:id",
+  authenticate,
+  authorize("SUPER_ADMIN", "Admin"),
+  getFundMovementById
+);
+
+router.put(
+  "/fund-movements/:id",
+  authenticate,
+  authorize("SUPER_ADMIN", "Admin"),
+  updateFundMovement
+);
+
+router.get(
+  "/fund-movements/:id/print",
+  authenticate,
+  authorize("SUPER_ADMIN", "Admin"),
+  printFundMovement
+);
+
 /**
  * GET /api/donations/verify/:reference
  */
