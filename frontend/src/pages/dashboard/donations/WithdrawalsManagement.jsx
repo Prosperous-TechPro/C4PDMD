@@ -71,6 +71,29 @@ const WithdrawalsManagement = () => {
     }
   };
 
+  const handleDownload = async (id) => {
+    try {
+      const res = await printFundMovement(id);
+      const pos = res?.data?.pos || res?.pos || '';
+
+      const html = `<!doctype html><html><head><meta charset="utf-8"><title>Receipt-${id}</title><style>body{font-family:monospace;padding:24px}</style></head><body><pre>${pos.replace(/</g, '&lt;')}</pre></body></html>`;
+
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `withdrawal-receipt-${id}.html`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      toast.success('Receipt downloaded. You can open and print the file.');
+    } catch (err) {
+      toast.error(err?.response?.data?.message || 'Unable to download receipt.');
+    }
+  };
+
   if (isLoading) return <PageLoader />;
   if (error) return <ErrorMessage message="Failed to load withdrawals." />;
 
@@ -134,6 +157,7 @@ const WithdrawalsManagement = () => {
                         ) : (
                           <>
                             <button onClick={() => handlePrint(m.id)} className="px-3 py-1 border rounded">Print</button>
+                            <button onClick={() => handleDownload(m.id)} className="px-3 py-1 border rounded">Download</button>
                             {editable ? (
                               <button onClick={() => handleEdit(m)} className="px-3 py-1 bg-blue-600 text-white rounded">Edit</button>
                             ) : (

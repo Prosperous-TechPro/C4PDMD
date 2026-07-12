@@ -214,21 +214,11 @@ const createFundMovement = async (req, res) => {
   try {
     const movement = await donationService.createFundMovement(req.body, req.user);
 
-    // determine available amount after creation (to report insignificance if necessary)
-    const available = await donationService.getAvailableAmount();
-
-    const responsePayload = {
+    return res.status(201).json({
       success: true,
       message: "Fund movement recorded successfully.",
       data: movement,
-    };
-
-    // if movement amount exceeds available (before movement), tell user
-    if (Number(req.body.amount) > available + Number(movement.amount || 0)) {
-      responsePayload.note = "Insignificant Balance";
-    }
-
-    return res.status(201).json(responsePayload);
+    });
   } catch (error) {
     console.error("CREATE FUND MOVEMENT ERROR:", error);
     return sendErrorResponse(res, error);
@@ -397,6 +387,9 @@ module.exports = {
   getDonationStats,
   getAllFundMovements,
   createFundMovement,
+  getFundMovementById,
+  updateFundMovement,
+  printFundMovement,
   initiateDonationCheckout,
   verifyDonationPayment,
   handlePaystackWebhook,

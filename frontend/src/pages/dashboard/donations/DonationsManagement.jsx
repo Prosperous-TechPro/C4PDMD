@@ -288,7 +288,8 @@ const DonationsManagement = () => {
       onError: (error, _variables, context) => {
         queryClient.setQueryData(["donationStats"], context?.previousStats);
         toast.error(
-          error?.message ||
+          error?.response?.data?.message ||
+            error?.message ||
             "Unable to record fund movement."
         );
       },
@@ -296,9 +297,22 @@ const DonationsManagement = () => {
 
   const handleMovementSubmit = (e) => {
     e.preventDefault();
+    const available = Number(stats.totalAmount || 0);
+    const amount = Number(movementForm.amount || 0);
+
+    if (Number.isNaN(amount) || amount <= 0) {
+      toast.error("Enter a valid amount.");
+      return;
+    }
+
+    if (amount > available) {
+      toast.error("Insignificant balance");
+      return;
+    }
+
     movementMutation.mutate({
       ...movementForm,
-      amount: Number(movementForm.amount),
+      amount,
     });
   };
 
@@ -436,10 +450,16 @@ const DonationsManagement = () => {
             className="w-full border rounded-lg p-3"
             required
           />
+          {Number(movementForm.amount || 0) > Number(stats.totalAmount || 0) && (
+            <div className="md:col-span-2 text-sm text-red-600">Insignificant balance</div>
+          )}
           <div className="md:col-span-2">
             <button
               type="submit"
-              disabled={movementMutation.isPending}
+              disabled={
+                movementMutation.isPending ||
+                Number(movementForm.amount || 0) > Number(stats.totalAmount || 0)
+              }
               className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-lg font-semibold"
             >
               {movementMutation.isPending ? "Saving..." : "Record Withdrawal / Usage"}

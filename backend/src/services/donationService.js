@@ -368,6 +368,14 @@ const createFundMovement = async (data, user) => {
 
     const initiatedBy = `${actor.firstName} ${actor.lastName}`.trim() || actor.email;
 
+    // ensure there is sufficient available amount before creating movement
+    const available = await getAvailableAmount();
+    if (Number(validated.amount) > Number(available)) {
+      const error = new Error("Insignificant balance");
+      error.statusCode = 400;
+      throw error;
+    }
+
     const movement = await prisma.fundMovement.create({
       data: {
         initiatedBy,
@@ -589,24 +597,7 @@ const handlePaystackWebhook = async ({
  * EXPORTS
  * =====================================================
  */
-
-module.exports = {
-  getAllDonations,
-  getDonationById,
-  createDonation,
-  updateDonation,
-  deleteDonation,
-  getDonationStats,
-  getAllFundMovements,
-  createFundMovement,
-  getFundMovementById,
-  updateFundMovement,
-  printFundMovement,
-  getAvailableAmount,
-  initiateDonationCheckout,
-  verifyDonationPayment,
-  handlePaystackWebhook,
-};
+// exports moved to end of file to ensure functions are initialized before export
 
 const getFundMovementById = async (id) => {
   try {
@@ -702,4 +693,22 @@ const printFundMovement = async (id) => {
     console.error("PRINT FUND MOVEMENT ERROR:", error);
     throw error;
   }
+};
+
+module.exports = {
+  getAllDonations,
+  getDonationById,
+  createDonation,
+  updateDonation,
+  deleteDonation,
+  getDonationStats,
+  getAllFundMovements,
+  createFundMovement,
+  getFundMovementById,
+  updateFundMovement,
+  printFundMovement,
+  getAvailableAmount,
+  initiateDonationCheckout,
+  verifyDonationPayment,
+  handlePaystackWebhook,
 };

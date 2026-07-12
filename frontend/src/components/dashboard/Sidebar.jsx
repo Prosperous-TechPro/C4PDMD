@@ -58,6 +58,12 @@ const menuSections = [
         roles: ["Admin", "Editor"],
       },
       {
+        title: "Withdrawal Receipts",
+        icon: CircleDollarSign,
+        path: "/dashboard/donations/withdrawals",
+        roles: ["Admin", "Editor"],
+      },
+      {
         title: "Gallery",
         icon: Image,
         path: "/dashboard/gallery",

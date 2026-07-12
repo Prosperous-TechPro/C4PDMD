@@ -91,6 +91,12 @@ const DashboardHome = () => {
     refetchOnReconnect: true,
   });
 
+  const { data: donationStatsData } = useQuery({
+    queryKey: ["donationStats"],
+    queryFn: getDonationStats,
+    staleTime: 2000,
+  });
+
   if (statsLoading) {
     return <PageLoader />;
   }
@@ -103,13 +109,6 @@ const DashboardHome = () => {
 
   const stats =
     statsData?.data?.overview || {};
-
-  const { data: donationStatsData } = useQuery({
-    queryKey: ["donationStats"],
-    queryFn: getDonationStats,
-    staleTime: 2000,
-  });
-
   const availableBalance = donationStatsData?.data?.totalAmount ?? null;
 
   const charts =
