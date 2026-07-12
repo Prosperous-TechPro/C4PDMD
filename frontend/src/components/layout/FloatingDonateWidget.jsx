@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Heart, Gift, HandHeart, X } from "lucide-react";
 
@@ -7,6 +7,7 @@ const STORAGE_KEY = "floatingDonateWidgetDismissed";
 
 const FloatingDonateWidget = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
   const [autoDisabled, setAutoDisabled] = useState(false);
   const [isReady, setIsReady] = useState(false);
@@ -51,7 +52,7 @@ const FloatingDonateWidget = () => {
   };
 
   const handleToggle = () => {
-    setIsExpanded((prev) => !prev);
+    navigate("/donate");
   };
 
   const hidePanelOnDonate = location.pathname === "/donate";
