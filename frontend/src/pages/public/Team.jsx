@@ -90,7 +90,7 @@ const Team = () => {
       {/* ========================================= */}
 
       <motion.section
-        className="relative text-white py-32 md:py-48 overflow-hidden"
+        className="relative text-white py-16 md:py-24 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}

@@ -57,8 +57,8 @@ const Services = () => {
   // Services statistics
   const stats = [
     { label: "Services Offered", value: services.length },
-    { label: "Communities Served", value: "50+" },
-    { label: "Expert Teams", value: "25+" },
+    { label: "Communities Served", value: "50" },
+    { label: "Expert Teams", value: "25" },
   ];
 
   return (
@@ -68,7 +68,7 @@ const Services = () => {
       {/* ========================================= */}
 
       <motion.section
-        className="relative text-white py-32 md:py-48 overflow-hidden"
+        className="relative text-white py-16 md:py-24 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
