@@ -90,7 +90,7 @@ const Donate = () => {
           response?.data;
 
         toast.success(
-          `Donation completed successfully${donation?.paymentReference ? ` (${donation.paymentReference})` : ""}.`
+          "Thank you for supporting C4PDMD! God bless you"
         );
 
         setFormData({
