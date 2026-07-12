@@ -25,6 +25,9 @@ const {
   sanitize,
   sanitizeEmail,
 } = require("../utils/sanitize");
+const {
+  validateFundMovementInput,
+} = require("../utils/fundMovementValidation");
 
 const DEFAULT_CURRENCY = "GHS";
 const DEFAULT_PROVIDER = "PAYSTACK";
@@ -295,16 +298,89 @@ const getDonationStats = async () => {
         0
       );
 
+    const fundMovements =
+      await prisma.$queryRaw`SELECT COALESCE(SUM("amount"), 0)::float AS "totalAmount" FROM "FundMovement"`;
+
+    const totalWithdrawn = Number(fundMovements?.[0]?.totalAmount || 0);
+    const availableAmount = Number(
+      (totalAmount - totalWithdrawn).toFixed(2)
+    );
+
     return {
       totalDonations:
         donations.length,
-      totalAmount,
+      totalAmount: availableAmount,
+      totalRaisedAmount: Number(totalAmount.toFixed(2)),
+      totalWithdrawn,
     };
   } catch (error) {
     console.error(
       "GET DONATION STATS ERROR:",
       error
     );
+    throw error;
+  }
+};
+
+const getAllFundMovements = async () => {
+  try {
+    return await prisma.fundMovement.findMany({
+      include: {
+        user: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
+      },
+      orderBy: {
+        occurredAt: "desc",
+      },
+    });
+  } catch (error) {
+    console.error("GET FUND MOVEMENTS ERROR:", error);
+    throw error;
+  }
+};
+
+const createFundMovement = async (data, user) => {
+  try {
+    const validated = validateFundMovementInput(data);
+
+    if (!user?.id) {
+      const error = new Error("Authentication required.");
+      error.statusCode = 401;
+      throw error;
+    }
+
+    const actor = await prisma.user.findUnique({
+      where: { id: user.id },
+      include: { role: true },
+    });
+
+    if (!actor) {
+      const error = new Error("Authenticated user not found.");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    const initiatedBy = `${actor.firstName} ${actor.lastName}`.trim() || actor.email;
+
+    const movement = await prisma.fundMovement.create({
+      data: {
+        initiatedBy,
+        amount: validated.amount,
+        reason: validated.reason,
+        occurredAt: validated.occurredAt,
+        userId: user.id,
+      },
+    });
+
+    return movement;
+  } catch (error) {
+    console.error("CREATE FUND MOVEMENT ERROR:", error);
     throw error;
   }
 };
@@ -521,6 +597,8 @@ module.exports = {
   updateDonation,
   deleteDonation,
   getDonationStats,
+  getAllFundMovements,
+  createFundMovement,
   initiateDonationCheckout,
   verifyDonationPayment,
   handlePaystackWebhook,

@@ -195,6 +195,36 @@ const getDonationStats = async (req, res) => {
   }
 };
 
+const getAllFundMovements = async (req, res) => {
+  try {
+    const movements = await donationService.getAllFundMovements();
+
+    return res.status(200).json({
+      success: true,
+      count: movements.length,
+      data: movements,
+    });
+  } catch (error) {
+    console.error("GET FUND MOVEMENTS ERROR:", error);
+    return sendErrorResponse(res, error);
+  }
+};
+
+const createFundMovement = async (req, res) => {
+  try {
+    const movement = await donationService.createFundMovement(req.body, req.user);
+
+    return res.status(201).json({
+      success: true,
+      message: "Fund movement recorded successfully.",
+      data: movement,
+    });
+  } catch (error) {
+    console.error("CREATE FUND MOVEMENT ERROR:", error);
+    return sendErrorResponse(res, error);
+  }
+};
+
 /**
  * =====================================================
  * INITIATE DONATION CHECKOUT
@@ -319,6 +349,8 @@ module.exports = {
   updateDonation,
   deleteDonation,
   getDonationStats,
+  getAllFundMovements,
+  createFundMovement,
   initiateDonationCheckout,
   verifyDonationPayment,
   handlePaystackWebhook,

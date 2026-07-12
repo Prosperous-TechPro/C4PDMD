@@ -50,6 +50,10 @@ const ContactsManagement = () => {
   } = useQuery({
     queryKey: ["messages"],
     queryFn: getMessages,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**

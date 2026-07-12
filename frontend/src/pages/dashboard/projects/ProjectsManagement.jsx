@@ -75,6 +75,10 @@ const ProjectsManagement = () => {
   } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**
@@ -88,6 +92,10 @@ const ProjectsManagement = () => {
   } = useQuery({
     queryKey: ["projectCategories"],
     queryFn: getProjectCategories,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**

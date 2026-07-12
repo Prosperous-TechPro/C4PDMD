@@ -33,8 +33,9 @@ model User {
   roleId Int
   role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
-  auditLogs AuditLog[]
-  authOtps  AuthOtp[]
+  auditLogs     AuditLog[]
+  authOtps      AuthOtp[]
+  fundMovements FundMovement[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -238,6 +239,20 @@ model Donation {
   paymentProvider  String    @default("PAYSTACK")
   currency         String    @default("GHS")
   paidAt           DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FundMovement {
+  id          Int      @id @default(autoincrement())
+  initiatedBy String
+  amount      Decimal  @db.Decimal(12, 2)
+  reason      String   @db.Text
+  occurredAt  DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

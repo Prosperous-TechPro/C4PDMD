@@ -13,65 +13,10 @@ const Sidebar = () => {
       <nav className="space-y-3">
 
         <Link
-          to="/dashboard"
-          className="block"
-        >
-          Dashboard
-        </Link>
-
-        <Link
-          to="/dashboard/users"
-          className="block"
-        >
-          Users
-        </Link>
-
-        <Link
-          to="/dashboard/team"
-          className="block"
-        >
-          Team
-        </Link>
-
-        <Link
-          to="/dashboard/services"
-          className="block"
-        >
-          Services
-        </Link>
-        <Link
-          to="/dashboard/projects"
-          className="block"
-        >
-          Projects
-        </Link>
-
-        <Link
           to="/dashboard/blogs"
           className="block"
         >
-          Blogs
-        </Link>
-
-        <Link
-          to="/dashboard/gallery"
-          className="block"
-        >
-          Gallery
-        </Link>
-
-        <Link
-          to="/dashboard/volunteers"
-          className="block"
-        >
-          Volunteers
-        </Link>
-
-        <Link
-          to="/dashboard/donations"
-          className="block"
-        >
-          Donations
+          Blog
         </Link>
 
         <Link
@@ -82,10 +27,24 @@ const Sidebar = () => {
         </Link>
 
         <Link
-          to="/dashboard/volunteers"
+          to="/dashboard"
           className="block"
         >
-          Volunteers
+          Dashboard
+        </Link>
+
+        <Link
+          to="/dashboard/donations"
+          className="block"
+        >
+          Donations
+        </Link>
+
+        <Link
+          to="/dashboard/gallery"
+          className="block"
+        >
+          Gallery
         </Link>
 
         <Link
@@ -93,6 +52,34 @@ const Sidebar = () => {
           className="block"
         >
           Partners
+        </Link>
+
+        <Link
+          to="/dashboard/projects"
+          className="block"
+        >
+          Projects
+        </Link>
+
+        <Link
+          to="/dashboard/services"
+          className="block"
+        >
+          Services
+        </Link>
+
+        <Link
+          to="/dashboard/settings"
+          className="block"
+        >
+          Settings
+        </Link>
+
+        <Link
+          to="/dashboard/team"
+          className="block"
+        >
+          Team
         </Link>
 
         <Link
@@ -110,10 +97,10 @@ const Sidebar = () => {
         </Link>
 
         <Link
-          to="/dashboard/settings"
+          to="/dashboard/volunteers"
           className="block"
         >
-          Settings
+          Volunteers
         </Link>
 
       </nav>

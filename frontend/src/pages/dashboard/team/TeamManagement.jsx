@@ -31,6 +31,10 @@ const TeamManagement = () => {
     useQuery({
       queryKey: ["team"],
       queryFn: getTeamMembers,
+      staleTime: 1000,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: true,
+      refetchOnMount: true,
     });
 
   const createMutation = useMutation({

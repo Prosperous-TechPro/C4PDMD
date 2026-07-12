@@ -71,6 +71,10 @@ const UsersManagement = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: getUsers,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**

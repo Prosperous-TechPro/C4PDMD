@@ -29,29 +29,9 @@ import {
 
 const menuItems = [
   {
-    title: "Home",
-    path: "/",
-    icon: Home,
-  },
-  {
     title: "About",
     path: "/about",
     icon: Info,
-  },
-  {
-    title: "Services",
-    path: "/services",
-    icon: Briefcase,
-  },
-  {
-    title: "Projects",
-    path: "/projects",
-    icon: FolderKanban,
-  },
-  {
-    title: "Team",
-    path: "/team",
-    icon: Users,
   },
   {
     title: "Blog",
@@ -59,14 +39,44 @@ const menuItems = [
     icon: Newspaper,
   },
   {
+    title: "Contact",
+    path: "/contact",
+    icon: Mail,
+  },
+  {
     title: "Gallery",
     path: "/gallery",
     icon: Image,
   },
   {
+    title: "Home",
+    path: "/",
+    icon: Home,
+  },
+  {
+    title: "Login",
+    path: "/login",
+    icon: User,
+  },
+  {
     title: "Partners",
     path: "/partners",
     icon: Handshake,
+  },
+  {
+    title: "Projects",
+    path: "/projects",
+    icon: FolderKanban,
+  },
+  {
+    title: "Services",
+    path: "/services",
+    icon: Briefcase,
+  },
+  {
+    title: "Team",
+    path: "/team",
+    icon: Users,
   },
   {
     title: "Testimonials",
@@ -77,16 +87,6 @@ const menuItems = [
     title: "Volunteer",
     path: "/volunteer",
     icon: HeartHandshake,
-  },
-  {
-    title: "Login",
-    path: "/login",
-    icon: User,
-  },
-  {
-    title: "Contact",
-    path: "/contact",
-    icon: Mail,
   },
 ];
 

@@ -77,6 +77,10 @@ const BlogManagement = () => {
   } = useQuery({
     queryKey: ["blogs"],
     queryFn: getBlogs,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**
@@ -90,6 +94,10 @@ const BlogManagement = () => {
   } = useQuery({
     queryKey: ["blogCategories"],
     queryFn: getBlogCategories,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**

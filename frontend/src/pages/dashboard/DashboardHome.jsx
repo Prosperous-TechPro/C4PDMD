@@ -61,7 +61,11 @@ const DashboardHome = () => {
   } = useQuery({
     queryKey: ["dashboardStats"],
     queryFn: getDashboardStats,
-    refetchInterval: 10000,
+    staleTime: 1000,
+    refetchInterval: 3000,
+    refetchIntervalInBackground: true,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 
   const {
@@ -70,6 +74,9 @@ const DashboardHome = () => {
   } = useQuery({
     queryKey: ["dashboardCharts"],
     queryFn: getDashboardCharts,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 
   const {
@@ -78,6 +85,9 @@ const DashboardHome = () => {
   } = useQuery({
     queryKey: ["dashboardRecent"],
     queryFn: getRecentActivities,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 
   if (statsLoading) {

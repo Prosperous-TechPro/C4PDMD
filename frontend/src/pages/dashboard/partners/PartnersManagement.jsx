@@ -73,6 +73,10 @@ const PartnersManagement = () => {
   } = useQuery({
     queryKey: ["partners"],
     queryFn: getPartners,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**

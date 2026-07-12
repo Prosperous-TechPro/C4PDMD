@@ -77,6 +77,10 @@ const GalleryManagement = () => {
   } = useQuery({
     queryKey: ["gallery"],
     queryFn: getGalleryItems,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**
@@ -93,6 +97,10 @@ const GalleryManagement = () => {
     ],
     queryFn:
       getGalleryCategories,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**

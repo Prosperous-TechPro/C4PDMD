@@ -69,6 +69,10 @@ const VolunteersManagement = () => {
   } = useQuery({
     queryKey: ["volunteers"],
     queryFn: getVolunteers,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**

@@ -73,6 +73,10 @@ const ServicesManagement = () => {
   } = useQuery({
     queryKey: ["services"],
     queryFn: getServices,
+    staleTime: 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   /**

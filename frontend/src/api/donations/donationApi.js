@@ -139,3 +139,22 @@ export const getDonationStats =
 
     return response.data;
   };
+
+export const getFundMovements = async () => {
+  const response = await API.get(
+    "/donations/fund-movements"
+  );
+
+  return response.data;
+};
+
+export const createFundMovement =
+  async (data) => {
+    const response =
+      await API.post(
+        "/donations/fund-movements",
+        data
+      );
+
+    return response.data;
+  };

@@ -13,6 +13,9 @@ const express = require("express");
 
 const router = express.Router();
 
+const authenticate = require("../middleware/authMiddleware");
+const authorize = require("../middleware/roleMiddleware");
+
 const {
   getAllDonations,
   getDonationById,
@@ -20,6 +23,8 @@ const {
   updateDonation,
   deleteDonation,
   getDonationStats,
+  getAllFundMovements,
+  createFundMovement,
   initiateDonationCheckout,
   verifyDonationPayment,
   handlePaystackWebhook,
@@ -46,6 +51,20 @@ router.get(
 router.post(
   "/checkout",
   initiateDonationCheckout
+);
+
+router.get(
+  "/fund-movements",
+  authenticate,
+  authorize("SUPER_ADMIN", "Admin"),
+  getAllFundMovements
+);
+
+router.post(
+  "/fund-movements",
+  authenticate,
+  authorize("SUPER_ADMIN", "Admin"),
+  createFundMovement
 );
 
 /**

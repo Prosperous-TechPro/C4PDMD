@@ -40,33 +40,21 @@ const menuSections = [
     title: "Management",
     items: [
       {
-        title: "Users",
-        icon: Users,
-        path: "/dashboard/users",
-        roles: ["Admin"],
-      },
-      {
-        title: "Team",
-        icon: Users,
-        path: "/dashboard/team",
-        roles: ["Admin", "Editor"],
-      },
-      {
-        title: "Services",
-        icon: Briefcase,
-        path: "/dashboard/services",
-        roles: ["Admin", "Editor"],
-      },
-      {
-        title: "Projects",
-        icon: FolderKanban,
-        path: "/dashboard/projects",
-        roles: ["Admin", "Editor"],
-      },
-      {
         title: "Blog",
         icon: Newspaper,
         path: "/dashboard/blogs",
+        roles: ["Admin", "Editor"],
+      },
+      {
+        title: "Contact Messages",
+        icon: Mail,
+        path: "/dashboard/contacts",
+        roles: ["Admin", "Editor"],
+      },
+      {
+        title: "Donations",
+        icon: CircleDollarSign,
+        path: "/dashboard/donations",
         roles: ["Admin", "Editor"],
       },
       {
@@ -82,27 +70,39 @@ const menuSections = [
         roles: ["Admin", "Editor"],
       },
       {
+        title: "Projects",
+        icon: FolderKanban,
+        path: "/dashboard/projects",
+        roles: ["Admin", "Editor"],
+      },
+      {
+        title: "Services",
+        icon: Briefcase,
+        path: "/dashboard/services",
+        roles: ["Admin", "Editor"],
+      },
+      {
+        title: "Team",
+        icon: Users,
+        path: "/dashboard/team",
+        roles: ["Admin", "Editor"],
+      },
+      {
         title: "Testimonials",
         icon: MessageSquareQuote,
         path: "/dashboard/testimonials",
         roles: ["Admin", "Editor"],
       },
       {
+        title: "Users",
+        icon: Users,
+        path: "/dashboard/users",
+        roles: ["Admin"],
+      },
+      {
         title: "Volunteers",
         icon: HeartHandshake,
         path: "/dashboard/volunteers",
-        roles: ["Admin", "Editor"],
-      },
-      {
-        title: "Donations",
-        icon: CircleDollarSign,
-        path: "/dashboard/donations",
-        roles: ["Admin", "Editor"],
-      },
-      {
-        title: "Contact Messages",
-        icon: Mail,
-        path: "/dashboard/contacts",
         roles: ["Admin", "Editor"],
       },
     ],
