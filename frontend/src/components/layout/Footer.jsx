@@ -47,119 +47,87 @@ const Footer = () => {
 
           {/* Quick Links */}
 
-          <details className="group">
-            <summary className="flex items-center justify-between font-semibold text-lg mb-4 cursor-pointer list-none">
+          <div>
+            <h3 className="font-semibold text-lg mb-4">
               Quick Links
-              <span className="text-[var(--accent)] group-open:rotate-180 transition-transform">⌄</span>
-            </summary>
+            </h3>
             <div className="space-y-2 pl-2">
-
-                <Link to="/" className="block hover:text-[var(--accent)]">
+              <Link to="/" className="block hover:text-[var(--accent)]">
                 Home
               </Link>
-
-                <Link to="/about" className="block hover:text-[var(--accent)]">
+              <Link to="/about" className="block hover:text-[var(--accent)]">
                 About
               </Link>
-
-                <Link to="/services" className="block hover:text-[var(--accent)]">
+              <Link to="/services" className="block hover:text-[var(--accent)]">
                 Services
               </Link>
-
-                <Link to="/projects" className="block hover:text-[var(--accent)]">
+              <Link to="/projects" className="block hover:text-[var(--accent)]">
                 Projects
               </Link>
-
-                <Link to="/blog" className="block hover:text-[var(--accent)]">
+              <Link to="/blog" className="block hover:text-[var(--accent)]">
                 Blog
               </Link>
-
-                <Link to="/contact" className="block hover:text-[var(--accent)]">
+              <Link to="/contact" className="block hover:text-[var(--accent)]">
                 Contact
               </Link>
-
             </div>
-
-          </details>
+          </div>
 
           {/* Get Involved */}
 
-          <details className="group">
-            <summary className="flex items-center justify-between font-semibold text-lg mb-4 cursor-pointer list-none">
+          <div>
+            <h3 className="font-semibold text-lg mb-4">
               Get Involved
-              <span className="text-[var(--accent)] group-open:rotate-180 transition-transform">⌄</span>
-            </summary>
+            </h3>
             <div className="space-y-2 pl-2">
-
-                <Link to="/volunteer" className="block hover:text-[var(--accent)]">
+              <Link to="/volunteer" className="block hover:text-[var(--accent)]">
                 Volunteer
               </Link>
-
-                <Link to="/donate" className="block hover:text-[var(--accent)]">
+              <Link to="/donate" className="block hover:text-[var(--accent)]">
                 Donate
               </Link>
-
-                <Link to="/partners" className="block hover:text-[var(--accent)]">
+              <Link to="/partners" className="block hover:text-[var(--accent)]">
                 Partners
               </Link>
-
-                <Link to="/team" className="block hover:text-[var(--accent)]">
+              <Link to="/team" className="block hover:text-[var(--accent)]">
                 Our Team
               </Link>
-
-                <Link to="/gallery" className="block hover:text-[var(--accent)]">
+              <Link to="/gallery" className="block hover:text-[var(--accent)]">
                 Gallery
               </Link>
-
             </div>
-
-          </details>
+          </div>
 
           {/* Contact */}
 
-          <details className="group">
-            <summary className="flex items-center justify-between font-semibold text-lg mb-4 cursor-pointer list-none">
+          <div>
+            <h3 className="font-semibold text-lg mb-4">
               Contact
-              <span className="text-[var(--accent)] group-open:rotate-180 transition-transform">⌄</span>
-            </summary>
+            </h3>
             <div className="space-y-4 pl-2">
-
               <div className="flex gap-3">
-
                 <FaMapMarkerAlt className="text-[var(--accent)] mt-1" />
-
                 <span>Ho, Ghana</span>
-
               </div>
-
               <div className="flex gap-3 items-center">
-
                 <FaPhone className="text-[var(--accent)] mt-1" />
-
                 <a
                   href="tel:+233242406733"
                   className="hover:text-[var(--accent)] transition"
                 >
                   +233 242 406 733
                 </a>
-
               </div>
-
               <div className="flex gap-3 items-center">
-
                 <FaEnvelope className="text-[var(--accent)] mt-1" />
-
                 <a
                   href="mailto:c4pdmd@gmail.com"
                   className="hover:text-[var(--accent)] transition"
                 >
                   c4pdmd@gmail.com
                 </a>
-
               </div>
-
               <div className="flex gap-4 pt-2">
-
                 <a
                   href="#"
                   aria-label="Facebook"
@@ -167,7 +135,6 @@ const Footer = () => {
                 >
                   <FaFacebook />
                 </a>
-
                 <a
                   href="#"
                   aria-label="LinkedIn"
@@ -175,7 +142,6 @@ const Footer = () => {
                 >
                   <FaLinkedin />
                 </a>
-
                 <a
                   href="#"
                   aria-label="Website"
@@ -183,12 +149,9 @@ const Footer = () => {
                 >
                   <FaGlobe />
                 </a>
-
               </div>
-
             </div>
-
-          </details>
+          </div>
 
         </div>
 

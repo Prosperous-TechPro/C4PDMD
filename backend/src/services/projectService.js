@@ -114,6 +114,18 @@ const createProjectCategory = async (data) => {
   }
 };
 
+const updateProjectCategory = async (id, data) => {
+  try {
+    return await prisma.projectCategory.update({
+      where: { id: Number(id) },
+      data: { name: data.name },
+    });
+  } catch (error) {
+    console.error("UPDATE PROJECT CATEGORY ERROR:", error);
+    throw error;
+  }
+};
+
 const getAllProjectCategories = async () => {
   try {
     return await prisma.projectCategory.findMany({
@@ -132,5 +144,6 @@ module.exports = {
   updateProject,
   deleteProject,
   createProjectCategory,
+  updateProjectCategory,
   getAllProjectCategories,
 };

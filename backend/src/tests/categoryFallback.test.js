@@ -29,3 +29,15 @@ test('project creation falls back to a default category when no categoryId is pr
   assert.equal(project.category.name, 'General');
   assert.ok(project.categoryId);
 });
+
+test('blog category can be deleted successfully', async () => {
+  const category = await blogService.createBlogCategory({
+    name: `Delete Test Category ${uniqueSuffix}`,
+  });
+
+  assert.ok(category.id);
+
+  const deleted = await blogService.deleteBlogCategory(category.id);
+
+  assert.equal(deleted.id, category.id);
+});

@@ -219,6 +219,20 @@ select {
   padding-inline: 1.5rem;
 }
 
+button[class*="bg-blue-"],
+a[class*="bg-blue-"],
+input[class*="bg-blue-"],
+[role="button"][class*="bg-blue-"] {
+  color: #ffffff !important;
+}
+
+button[class*="bg-blue-"] svg,
+a[class*="bg-blue-"] svg,
+input[class*="bg-blue-"] svg,
+[role="button"][class*="bg-blue-"] svg {
+  color: inherit;
+}
+
 .app-heading {
   color: var(--text);
   letter-spacing: -0.03em;

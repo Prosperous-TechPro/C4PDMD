@@ -20,6 +20,13 @@ const Sidebar = () => {
         </Link>
 
         <Link
+          to="/dashboard/blogs/categories"
+          className="block"
+        >
+          Blog Categories
+        </Link>
+
+        <Link
           to="/dashboard/contacts"
           className="block"
         >
@@ -73,6 +80,13 @@ const Sidebar = () => {
           className="block"
         >
           Settings
+        </Link>
+
+        <Link
+          to="/dashboard/organization-settings"
+          className="block"
+        >
+          Organization Settings
         </Link>
 
         <Link

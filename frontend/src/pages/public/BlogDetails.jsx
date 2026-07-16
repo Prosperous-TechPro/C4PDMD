@@ -122,6 +122,8 @@ const BlogDetails = () => {
         <img
           src={blog.image}
           alt={blog.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-[500px] object-cover"
         />
       )}
@@ -244,6 +246,8 @@ const BlogDetails = () => {
                           alt={
                             related.title
                           }
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-52 object-cover"
                         />
 

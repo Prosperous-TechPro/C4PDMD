@@ -19,6 +19,7 @@ test('normalizes homepage impact stats for the public home page', () => {
   assert.equal(normalized.communitiesReached, '50+');
   assert.equal(normalized.activeVolunteers, '98');
   assert.equal(normalized.yearsOfExperience, '15+');
+  assert.equal(normalized.evidenceBasedText, 'Using data and research to drive sustainable change');
 });
 
 test('falls back to empty values when impact stats are missing', () => {
@@ -29,4 +30,5 @@ test('falls back to empty values when impact stats are missing', () => {
   assert.equal(normalized.communitiesReached, '');
   assert.equal(normalized.activeVolunteers, '');
   assert.equal(normalized.yearsOfExperience, '');
+  assert.equal(normalized.evidenceBasedText, '');
 });

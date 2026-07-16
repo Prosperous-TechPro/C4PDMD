@@ -94,5 +94,17 @@ export const createProjectCategory = async (
   return response.data;
 };
 
+export const updateProjectCategory = async (
+  id,
+  data
+) => {
+  const response = await API.put(
+    `/projects/categories/${id}`,
+    data
+  );
+
+  return response.data;
+};
+
 // Backwards-compatible alias expected by some imports
 export const getProjectById = getProject;

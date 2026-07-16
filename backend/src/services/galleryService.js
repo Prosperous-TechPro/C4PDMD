@@ -177,6 +177,25 @@ const createGalleryCategory = async (
  * =====================================================
  */
 
+const updateGalleryCategory = async (id, data) => {
+  try {
+    return await prisma.galleryCategory.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        name: data.name,
+      },
+    });
+  } catch (error) {
+    console.error(
+      "UPDATE GALLERY CATEGORY ERROR:",
+      error
+    );
+    throw error;
+  }
+};
+
 const getAllGalleryCategories = async () => {
   try {
     return await prisma.galleryCategory.findMany({
@@ -206,5 +225,6 @@ module.exports = {
   updateGalleryItem,
   deleteGalleryItem,
   createGalleryCategory,
+  updateGalleryCategory,
   getAllGalleryCategories,
 };

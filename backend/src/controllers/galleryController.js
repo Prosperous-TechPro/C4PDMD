@@ -213,6 +213,36 @@ const createGalleryCategory = async (
  * =====================================================
  */
 
+const updateGalleryCategory = async (
+  req,
+  res
+) => {
+  try {
+    const category =
+      await galleryService.updateGalleryCategory(
+        req.params.id,
+        req.body
+      );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "Gallery category updated successfully.",
+      data: category,
+    });
+  } catch (error) {
+    console.error(
+      "UPDATE GALLERY CATEGORY ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 const getAllGalleryCategories = async (
   req,
   res
@@ -252,5 +282,6 @@ module.exports = {
   updateGalleryItem,
   deleteGalleryItem,
   createGalleryCategory,
+  updateGalleryCategory,
   getAllGalleryCategories,
 };

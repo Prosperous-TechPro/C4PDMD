@@ -26,6 +26,7 @@ const {
   updateProject,
   deleteProject,
   createProjectCategory,
+  updateProjectCategory,
   getAllProjectCategories,
 } = require("../controllers/projectController");
 
@@ -57,6 +58,11 @@ router.get(
 router.post(
   "/categories",
   createProjectCategory
+);
+
+router.put(
+  "/categories/:id",
+  updateProjectCategory
 );
 
 /**

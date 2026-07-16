@@ -165,6 +165,55 @@ const createBlogCategory = async (req, res) => {
 };
 
 /**
+ * UPDATE BLOG CATEGORY
+ */
+
+const updateBlogCategory = async (req, res) => {
+  try {
+    const category =
+      await blogService.updateBlogCategory(
+        req.params.id,
+        req.body
+      );
+
+    return res.status(200).json({
+      success: true,
+      message: "Blog category updated successfully.",
+      data: category,
+    });
+  } catch (error) {
+    console.error("UPDATE BLOG CATEGORY ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+/**
+ * DELETE BLOG CATEGORY
+ */
+
+const deleteBlogCategory = async (req, res) => {
+  try {
+    await blogService.deleteBlogCategory(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Blog category deleted successfully.",
+    });
+  } catch (error) {
+    console.error("DELETE BLOG CATEGORY ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+/**
  * GET ALL BLOG CATEGORIES
  */
 
@@ -195,5 +244,7 @@ module.exports = {
   updateBlogPost,
   deleteBlogPost,
   createBlogCategory,
+  updateBlogCategory,
+  deleteBlogCategory,
   getAllBlogCategories,
 };

@@ -79,7 +79,10 @@ export const updateBlog = async (
 
   return response.data;
 };
-
+export const deleteBlogCategory = async (id) => {
+  const response = await API.delete(`/blog/categories/${id}`);
+  return response.data;
+};
 /**
  * =====================================================
  * DELETE BLOG POST
@@ -105,6 +108,18 @@ export const createBlogCategory = async (
 ) => {
   const response = await API.post(
     "/blog/categories",
+    data
+  );
+
+  return response.data;
+};
+
+export const updateBlogCategory = async (
+  id,
+  data
+) => {
+  const response = await API.put(
+    `/blog/categories/${id}`,
     data
   );
 

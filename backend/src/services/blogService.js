@@ -88,6 +88,7 @@ const createBlogPost = async (data) => {
         title: data.title,
         content: data.content,
         image: data.image || null,
+        media: data.media || [],
         status: data.status || "DRAFT",
         categoryId,
       },
@@ -117,6 +118,7 @@ const updateBlogPost = async (id, data) => {
         title: data.title,
         content: data.content,
         image: data.image,
+        media: data.media || [],
         status: data.status,
         categoryId: Number(data.categoryId),
       },
@@ -168,6 +170,35 @@ const createBlogCategory = async (data) => {
   }
 };
 
+const updateBlogCategory = async (id, data) => {
+  try {
+    return await prisma.blogCategory.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        name: data.name,
+      },
+    });
+  } catch (error) {
+    console.error("UPDATE BLOG CATEGORY ERROR:", error);
+    throw error;
+  }
+};
+
+const deleteBlogCategory = async (id) => {
+  try {
+    return await prisma.blogCategory.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+  } catch (error) {
+    console.error("DELETE BLOG CATEGORY ERROR:", error);
+    throw error;
+  }
+};
+
 /**
  * =====================================================
  * GET ALL BLOG CATEGORIES
@@ -194,5 +225,7 @@ module.exports = {
   updateBlogPost,
   deleteBlogPost,
   createBlogCategory,
+  updateBlogCategory,
+  deleteBlogCategory,
   getAllBlogCategories,
 };

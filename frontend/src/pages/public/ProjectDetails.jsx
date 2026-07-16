@@ -118,6 +118,8 @@ const ProjectDetails = () => {
           <img
             src={project.image}
             alt={project.title}
+            loading="lazy"
+            decoding="async"
             className="w-full h-[500px] object-cover"
           />
 
@@ -282,6 +284,8 @@ const ProjectDetails = () => {
                         image.image
                       }
                       alt={`Project ${index}`}
+                      loading="lazy"
+                      decoding="async"
                       className="rounded-xl shadow h-64 w-full object-cover"
                     />
 
@@ -329,6 +333,8 @@ const ProjectDetails = () => {
                           alt={
                             related.title
                           }
+                          loading="lazy"
+                          decoding="async"
                           className="h-56 w-full object-cover"
                         />
 

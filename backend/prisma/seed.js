@@ -286,6 +286,8 @@ async function main() {
         email: "c4pdmd@gmail.com",
         phone: "+233242406733",
         address: "Ho, Volta Region, Ghana",
+        evidenceBasedText:
+          "Using data and research to drive sustainable change",
       },
     });
   } catch (settingsError) {

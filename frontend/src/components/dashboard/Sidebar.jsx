@@ -285,11 +285,16 @@ const Sidebar = ({
           <button
             type="button"
             onClick={() => {
-              logout();
-              closeSidebar(false);
-              navigate("/login");
+              const confirmed = window.confirm(
+                "Do you want to logout?"
+              );
+              if (confirmed) {
+                logout();
+                closeSidebar(false);
+                navigate("/login");
+              }
             }}
-            className="flex w-full items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left font-medium text-white/90 transition hover:bg-white/10 hover:text-white"
+            className="flex w-full items-center gap-3 rounded-xl bg-red-600 px-4 py-3 text-left font-medium text-white transition hover:bg-red-700"
           >
             <LogOut size={18} />
             <span>Logout</span>

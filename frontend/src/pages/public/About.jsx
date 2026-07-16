@@ -65,6 +65,18 @@ const About = () => {
 
   const team = data?.data || [];
 
+  const yearsOfExperienceText = organization?.yearsOfExperience
+    ? `${organization.yearsOfExperience} Years of Experience`
+    : "15 Years of Experience";
+
+  const communitiesText = organization?.communitiesReached
+    ? `${organization.communitiesReached} Communities`
+    : "50+ Communities";
+
+  const evidenceBasedText =
+    organization?.evidenceBasedText ||
+    "Using data and research to drive sustainable change";
+
   // Core values
   const coreValues = [
     {
@@ -220,7 +232,7 @@ const About = () => {
                   <Award className="text-blue-700 mr-4 mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2">
-                      15 Years of Experience
+                      {yearsOfExperienceText}
                     </h3>
                     <p className="text-gray-600">
                       Serving communities across Africa with dedication and impact
@@ -231,7 +243,7 @@ const About = () => {
                   <Users className="text-blue-700 mr-4 mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2">
-                      50+ Communities
+                      {communitiesText}
                     </h3>
                     <p className="text-gray-600">
                       Making a difference in the lives of thousands
@@ -245,7 +257,7 @@ const About = () => {
                       Evidence-Based Approach
                     </h3>
                     <p className="text-gray-600">
-                      Using data and research to drive sustainable change
+                      {evidenceBasedText}
                     </p>
                   </div>
                 </div>

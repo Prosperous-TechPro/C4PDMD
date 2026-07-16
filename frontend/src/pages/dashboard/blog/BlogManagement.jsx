@@ -221,16 +221,24 @@ const BlogManagement = () => {
 
         </div>
 
-        <button
-          onClick={() =>
-            setShowForm(!showForm)
-          }
-          className="bg-blue-700 hover:bg-blue-800 text-white px-5 py-3 rounded-lg"
-        >
-          {showForm
-            ? "Close Form"
-            : "Add Blog"}
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => navigate("/dashboard/blogs/categories")}
+            className="bg-slate-700 hover:bg-slate-800 text-white px-5 py-3 rounded-lg"
+          >
+            Blog Categories
+          </button>
+          <button
+            onClick={() =>
+              setShowForm(!showForm)
+            }
+            className="bg-blue-700 hover:bg-blue-800 text-white px-5 py-3 rounded-lg"
+          >
+            {showForm
+              ? "Close Form"
+              : "Add Blog"}
+          </button>
+        </div>
 
       </div>
 

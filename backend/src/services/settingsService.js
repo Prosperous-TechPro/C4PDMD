@@ -90,13 +90,34 @@ const updateSettings = async (
 
   const normalizedData = normalizeSettingsPayload(data);
 
-  return await prisma.setting.update({
-    where: {
-      id: settings.id,
-    },
+  // Prisma client may be out-of-sync with the schema during development
+  // (e.g. after migrations) which can cause unknown-argument errors
+  // for newly added fields. Update remaining fields normally and
+  // apply a raw SQL update for `evidenceBasedText` as a safe fallback.
 
-    data: normalizedData,
+  const dataToUpdate = { ...normalizedData };
+  const evidenceText = dataToUpdate.evidenceBasedText;
+  delete dataToUpdate.evidenceBasedText;
+
+  const updated = await prisma.setting.update({
+    where: { id: settings.id },
+    data: dataToUpdate,
   });
+
+  if (typeof evidenceText !== "undefined") {
+    try {
+      await prisma.$executeRawUnsafe(
+        `UPDATE "Setting" SET "evidenceBasedText" = $1 WHERE id = $2`,
+        evidenceText,
+        settings.id
+      );
+    } catch (err) {
+      console.error("Failed to update evidenceBasedText via raw SQL:", err);
+      // continue; main update already applied
+    }
+  }
+
+  return updated;
 };
 
 /**

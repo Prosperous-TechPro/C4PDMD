@@ -118,3 +118,13 @@ export const createGalleryCategory =
 
     return response.data;
   };
+
+export const updateGalleryCategory =
+  async (id, data) => {
+    const response = await API.put(
+      `/gallery/categories/${id}`,
+      data
+    );
+
+    return response.data;
+  };

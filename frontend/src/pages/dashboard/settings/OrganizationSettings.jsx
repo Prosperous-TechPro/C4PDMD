@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import {
   useQuery,
   useMutation,
+  useQueryClient,
 } from "@tanstack/react-query";
 
 import toast from "react-hot-toast";
@@ -30,6 +31,8 @@ const OrganizationSettings = () => {
    * STATE
    * ======================================
    */
+
+  const queryClient = useQueryClient();
 
   const [formData, setFormData] =
     useState({
@@ -65,6 +68,7 @@ const OrganizationSettings = () => {
       communitiesReached: "",
       activeVolunteers: "",
       yearsOfExperience: "",
+      evidenceBasedText: "",
     });
 
   const [hasLoadedSettings, setHasLoadedSettings] = useState(false);
@@ -128,6 +132,7 @@ const OrganizationSettings = () => {
       communitiesReached: data.data.communitiesReached || "",
       activeVolunteers: data.data.activeVolunteers || "",
       yearsOfExperience: data.data.yearsOfExperience || "",
+      evidenceBasedText: data.data.evidenceBasedText || "",
     });
 
     setHasLoadedSettings(true);
@@ -151,6 +156,9 @@ const OrganizationSettings = () => {
         toast.success(
           "Organization settings updated successfully."
         );
+
+        queryClient.invalidateQueries(["settings"]);
+        queryClient.invalidateQueries(["organization-settings"]);
 
       },
 
@@ -886,6 +894,20 @@ const OrganizationSettings = () => {
                 onChange={handleChange}
                 className="w-full border rounded-lg p-3"
                 placeholder="15+"
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block mb-2 font-medium">
+                Evidence-Based Approach Text
+              </label>
+              <input
+                type="text"
+                name="evidenceBasedText"
+                value={formData.evidenceBasedText}
+                onChange={handleChange}
+                className="w-full border rounded-lg p-3"
+                placeholder="Using data and research to drive sustainable change"
               />
             </div>
 

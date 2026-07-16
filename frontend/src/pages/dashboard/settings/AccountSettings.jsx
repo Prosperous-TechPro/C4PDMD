@@ -217,6 +217,13 @@ const AccountSettings = () => {
    */
 
   const handleLogout = () => {
+    const confirmed = window.confirm(
+      "Do you want to logout?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
 
     logout();
 
@@ -226,7 +233,6 @@ const AccountSettings = () => {
 
     window.location.href =
       "/login";
-
   };
 
   return (

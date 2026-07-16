@@ -175,6 +175,8 @@ const Partners = () => {
                       <img
                         src={partner.logo}
                         alt={partner.name}
+                        loading="lazy"
+                        decoding="async"
                         className="h-28 object-contain mb-6"
                       />
 

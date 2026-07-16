@@ -19,7 +19,7 @@ const Navbar = ({ toggleMenu, mobileOpen }) => {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur shadow-sm">
 
-      <div className="app-container h-20 flex items-center gap-4">
+      <div className="app-container h-20 flex items-center justify-between gap-4">
 
           {/* Logo */}
 

@@ -20,6 +20,8 @@ const {
   updateBlogPost,
   deleteBlogPost,
   createBlogCategory,
+  updateBlogCategory,
+  deleteBlogCategory,
   getAllBlogCategories,
 } = require("../controllers/blogController");
 
@@ -37,6 +39,16 @@ router.get(
 router.post(
   "/categories",
   createBlogCategory
+);
+
+router.put(
+  "/categories/:id",
+  updateBlogCategory
+);
+
+router.delete(
+  "/categories/:id",
+  deleteBlogCategory
 );
 
 /**

@@ -173,6 +173,7 @@ model BlogPost {
   title   String
   content String  @db.Text
   image   String?
+  media   Json?
   status  String  @default("DRAFT")
 
   categoryId Int
@@ -346,6 +347,7 @@ model Setting {
   communitiesReached String?
   activeVolunteers  String?
   yearsOfExperience String?
+  evidenceBasedText String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

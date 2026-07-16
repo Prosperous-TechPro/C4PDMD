@@ -83,6 +83,7 @@ const EditProject = lazy(() => import("../pages/dashboard/projects/EditProject")
 
 const BlogManagement = lazy(() => import("../pages/dashboard/blog/BlogManagement"));
 const EditBlog = lazy(() => import("../pages/dashboard/blog/EditBlog"));
+const BlogCategoriesManagement = lazy(() => import("../pages/dashboard/blog/BlogCategoriesManagement"));
 
 /* ================= GALLERY ================= */
 
@@ -312,6 +313,11 @@ const AppRoutes = () => {
           <Route
             path="blogs"
             element={<BlogManagement />}
+          />
+
+          <Route
+            path="blogs/categories"
+            element={<BlogCategoriesManagement />}
           />
 
           <Route

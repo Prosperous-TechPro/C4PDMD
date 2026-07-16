@@ -20,6 +20,7 @@ const {
   updateGalleryItem,
   deleteGalleryItem,
   createGalleryCategory,
+  updateGalleryCategory,
   getAllGalleryCategories,
 } = require("../controllers/galleryController");
 
@@ -45,6 +46,15 @@ router.get(
 router.post(
   "/categories",
   createGalleryCategory
+);
+
+/**
+ * UPDATE CATEGORY
+ * PUT /api/gallery/categories/:id
+ */
+router.put(
+  "/categories/:id",
+  updateGalleryCategory
 );
 
 /**

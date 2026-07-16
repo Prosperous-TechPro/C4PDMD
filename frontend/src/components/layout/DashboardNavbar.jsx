@@ -23,7 +23,16 @@ const DashboardNavbar = () => {
         </span>
 
         <button
-          onClick={logout}
+          onClick={() => {
+            const confirmed = window.confirm(
+              "Do you want to logout?"
+            );
+            if (confirmed) {
+              logout();
+              window.location.href = "/login";
+            }
+          }}
+          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition"
         >
           Logout
         </button>

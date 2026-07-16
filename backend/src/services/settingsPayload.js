@@ -31,6 +31,7 @@ const normalizeSettingsPayload = (data = {}) => ({
   communitiesReached: data.communitiesReached ?? "",
   activeVolunteers: data.activeVolunteers ?? "",
   yearsOfExperience: data.yearsOfExperience ?? "",
+  evidenceBasedText: data.evidenceBasedText ?? "",
 });
 
 module.exports = {
