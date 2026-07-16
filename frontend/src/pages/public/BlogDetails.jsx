@@ -198,13 +198,10 @@ const BlogDetails = () => {
           <article className="mt-12">
 
             <div className="prose max-w-none prose-lg">
-
-              <p className="whitespace-pre-line leading-8 text-gray-700">
-
-                {blog?.content}
-
-              </p>
-
+              <div
+                className="whitespace-pre-line leading-8 text-gray-700"
+                dangerouslySetInnerHTML={{ __html: blog?.content || "" }}
+              />
             </div>
 
           </article>

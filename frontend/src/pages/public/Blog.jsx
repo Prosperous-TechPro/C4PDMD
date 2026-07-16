@@ -90,10 +90,18 @@ const Blog = () => {
   const calculateReadingTime = (content) => {
     if (!content) return "5 min read";
     const wordsPerMinute = 200;
-    const wordCount = content.split(/\s+/).length;
+    const wordCount = content.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
     const minutes = Math.ceil(wordCount / wordsPerMinute);
     return `${minutes} min read`;
   };
+
+  const stripHtml = (html = "") =>
+    html
+      .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, " ")
+      .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
 
   return (
     <div className="overflow-hidden">
@@ -297,7 +305,7 @@ const Blog = () => {
 
                     {/* Description/Excerpt */}
                     <p className="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow">
-                      {blog.content}
+                      {stripHtml(blog.content)}
                     </p>
 
                     {/* Meta Information */}
