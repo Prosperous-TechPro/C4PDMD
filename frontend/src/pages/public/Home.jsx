@@ -1021,24 +1021,26 @@ const Home = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  {testimonial.photo && (
+                  {testimonial.image && (
                     <div className="h-16 w-16 rounded-full mb-4 overflow-hidden">
                       <LazyImage
-                        src={testimonial.photo}
+                        src={testimonial.image}
                         alt={testimonial.name}
                         className="w-full h-full object-cover"
                       />
                     </div>
                   )}
                   <p className="text-blue-100 mb-6 leading-relaxed">
-                    "{testimonial.testimonial}"
+                    "{testimonial.message}"
                   </p>
                   <h3 className="text-lg font-bold mb-1">
                     {testimonial.name}
                   </h3>
-                  <p className="text-blue-200 text-sm">
-                    {testimonial.position}
-                  </p>
+                  {testimonial.position && (
+                    <p className="text-blue-200 text-sm">
+                      {testimonial.position}
+                    </p>
+                  )}
                 </motion.div>
               ))}
             </div>
