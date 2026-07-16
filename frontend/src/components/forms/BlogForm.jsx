@@ -6,7 +6,7 @@ const BlogForm = ({ onSubmit = () => {}, initialData = {}, loading = false, cate
   const [formData, setFormData] = useState({
     title: initialData.title || "",
     content: initialData.content || "",
-    status: initialData.status || "DRAFT",
+    status: initialData.status || "PUBLISHED",
     categoryId: initialData.categoryId || categories[0]?.id || "",
   });
   const [mediaItems, setMediaItems] = useState(
