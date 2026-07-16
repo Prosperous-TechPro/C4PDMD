@@ -169,7 +169,7 @@ const Donate = () => {
 
           <Heart
             size={60}
-            className="mx-auto mb-6"
+            className="mx-auto mb-6 text-yellow-400"
           />
 
           <h1 className="text-5xl font-bold">

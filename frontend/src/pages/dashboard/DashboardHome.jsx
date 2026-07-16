@@ -187,7 +187,7 @@ const DashboardHome = () => {
     {
       title: "Volunteers",
       value: stats.totalVolunteers ?? 0,
-      icon: <HeartHandshake />,
+      icon: <HeartHandshake className="text-yellow-400" />,
       color: "bg-cyan-600",
       route: "/dashboard/volunteers",
       buttonLabel: "Manage Volunteers",

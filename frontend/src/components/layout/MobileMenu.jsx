@@ -86,7 +86,9 @@ const menuItems = [
   {
     title: "Volunteer",
     path: "/volunteer",
-    icon: HeartHandshake,
+    icon: (props) => (
+      <HeartHandshake {...props} className={`text-yellow-400 ${props.className || ""}`} />
+    ),
   },
 ];
 
@@ -218,7 +220,7 @@ const MobileMenu = ({
               transition
             "
           >
-            <Heart size={18} />
+            <Heart size={18} className="text-yellow-400" />
             Donate Now
           </Link>
 

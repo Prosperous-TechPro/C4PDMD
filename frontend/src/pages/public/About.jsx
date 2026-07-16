@@ -80,7 +80,7 @@ const About = () => {
   // Core values
   const coreValues = [
     {
-      icon: <Heart className="w-8 h-8" />,
+      icon: <Heart className="w-8 h-8 text-yellow-400" />,
       title: "Integrity",
       description: "Upholding the highest ethical standards in all our work",
     },

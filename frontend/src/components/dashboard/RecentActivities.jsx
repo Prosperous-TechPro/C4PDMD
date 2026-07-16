@@ -33,7 +33,7 @@ const icons = {
 
   Volunteer: (
     <HeartHandshake
-      className="w-5 h-5"
+      className="w-5 h-5 text-yellow-400"
     />
   ),
 

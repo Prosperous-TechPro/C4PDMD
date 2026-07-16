@@ -97,16 +97,16 @@ const FloatingDonateWidget = () => {
 
               <div className="mt-6 space-y-4">
                 <div className="grid grid-cols-3 gap-3">
-                  <div className="bg-white/10 rounded-2xl p-3 flex flex-col items-center justify-center text-yellow-300">
-                    <Heart size={18} />
+                  <div className="bg-white/10 rounded-2xl p-3 flex flex-col items-center justify-center text-yellow-400">
+                    <Heart size={18} className="text-yellow-400" />
                     <span className="text-xs mt-2">Care</span>
                   </div>
-                  <div className="bg-white/10 rounded-2xl p-3 flex flex-col items-center justify-center text-yellow-300">
+                  <div className="bg-white/10 rounded-2xl p-3 flex flex-col items-center justify-center text-yellow-400">
                     <Gift size={18} />
                     <span className="text-xs mt-2">Impact</span>
                   </div>
-                  <div className="bg-white/10 rounded-2xl p-3 flex flex-col items-center justify-center text-yellow-300">
-                    <HandHeart size={18} />
+                  <div className="bg-white/10 rounded-2xl p-3 flex flex-col items-center justify-center text-yellow-400">
+                    <HandHeart size={18} className="text-yellow-400" />
                     <span className="text-xs mt-2">Hope</span>
                   </div>
                 </div>
@@ -146,7 +146,7 @@ const FloatingDonateWidget = () => {
         aria-label={isExpanded ? "Collapse donation widget" : "Open donation widget"}
         aria-expanded={isExpanded}
       >
-        <Heart size={20} className="text-yellow-300" />
+        <Heart size={20} className="text-yellow-400" />
         <span className="hidden sm:inline-flex font-semibold">Donate</span>
       </motion.button>
     </div>

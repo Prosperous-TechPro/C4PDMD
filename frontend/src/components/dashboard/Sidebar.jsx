@@ -107,7 +107,12 @@ const menuSections = [
       },
       {
         title: "Volunteers",
-        icon: HeartHandshake,
+        icon: (props) => (
+          <HeartHandshake
+            {...props}
+            className={`text-yellow-400 ${props.className || ""}`}
+          />
+        ),
         path: "/dashboard/volunteers",
         roles: ["Admin", "Editor"],
       },

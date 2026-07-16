@@ -302,7 +302,7 @@ const Home = () => {
                 to="/donate"
                 className="inline-flex items-center justify-center bg-yellow-500 text-blue-700 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                <Heart className="mr-2" size={20} />
+                <Heart className="mr-2 text-yellow-400" size={20} />
                 Donate Now
               </Link>
               <Link
@@ -1202,7 +1202,7 @@ const Home = () => {
               to="/donate"
               className="inline-flex items-center bg-purple-500 text-red-700 px-8 py-4 rounded-lg font-semibold hover:bg-blue-500 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              <Heart className="mr-2" size={20} />
+              <Heart className="mr-2 text-yellow-400" size={20} />
               Make a Donation
             </Link>
           </motion.div>
