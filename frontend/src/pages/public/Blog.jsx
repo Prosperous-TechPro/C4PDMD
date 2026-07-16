@@ -103,6 +103,13 @@ const Blog = () => {
       .replace(/\s+/g, " ")
       .trim();
 
+  const getFirstImageSrc = (html = "") => {
+    const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+    return match ? match[1] : null;
+  };
+
+  const getBlogThumbnail = (blog) => blog.image || getFirstImageSrc(blog.content);
+
   return (
     <div className="overflow-hidden">
       {/* ========================================= */}
@@ -279,10 +286,10 @@ const Blog = () => {
                   whileHover={{ y: -5 }}
                 >
                   {/* Blog Image */}
-                  {blog.image && (
+                  {getBlogThumbnail(blog) && (
                     <div className="h-56 w-full overflow-hidden">
                       <LazyImage
-                        src={blog.image}
+                        src={getBlogThumbnail(blog)}
                         alt={blog.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
