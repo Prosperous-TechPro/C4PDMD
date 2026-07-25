@@ -99,6 +99,7 @@ const OrganizationSettings = () => {
       return;
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormData({
       organizationName: data.data.organizationName || "",
       shortName: data.data.shortName || "",

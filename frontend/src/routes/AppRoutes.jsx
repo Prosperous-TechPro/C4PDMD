@@ -52,6 +52,7 @@ const Volunteer = lazy(() => import("../pages/public/Volunteer"));
 const Donate = lazy(() => import("../pages/public/Donate"));
 const Contact = lazy(() => import("../pages/public/Contact"));
 const NotFound = lazy(() => import("../pages/public/not-found/NotFound"));
+const Offline = lazy(() => import("../pages/public/Offline"));
 
 /* =====================================================
    DASHBOARD
@@ -434,6 +435,11 @@ const AppRoutes = () => {
           />
 
 </Route>
+
+        <Route
+          path="offline"
+          element={<Offline />}
+        />
 
         {/* ==========================================
             404

@@ -10,7 +10,7 @@ const ForgotPassword = () => {
 
   const mutation = useMutation({
     mutationFn: forgotPassword,
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success("Verification code sent.");
       navigate(`/reset-password?email=${encodeURIComponent(email)}`);
     },

@@ -43,6 +43,7 @@ const AccountSettings = () => {
     });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProfile({
       firstName: user?.firstName || "",
       lastName: user?.lastName || "",
@@ -101,7 +102,7 @@ const AccountSettings = () => {
         if (refreshedUser) {
           setUser(refreshedUser);
         }
-      } catch (error) {
+      } catch {
         // ignore refresh failures and keep the latest local update
       }
 

@@ -24,13 +24,6 @@ import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { createMessage } from "../../api/contact/contactApi";
 import { useOrganization } from "../../contexts/OrganizationContext";
 
-// Animation variants
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 },
-};
-
 const Contact = () => {
   // SEO Meta Tags
   useEffect(() => {
@@ -473,7 +466,7 @@ const Contact = () => {
           >
             <iframe
               title="C4PDMD Location"
-              src="https://www.google.com/maps?q=Ho,Ghana&output=embed"
+              src="https://www.google.com/maps?q=Digital+Address%3A+VA-2245-9390%2C+Ho%2C+Volta+Region%2C+Ghana&output=embed"
               width="100%"
               height="500"
               loading="lazy"

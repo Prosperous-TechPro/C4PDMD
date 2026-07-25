@@ -11,12 +11,14 @@ import { Outlet } from "react-router-dom";
 
 import Sidebar from "../components/dashboard/Sidebar";
 import Navbar from "../components/dashboard/Navbar";
+import OfflineNotice from "../components/pwa/OfflineNotice";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="app-page min-h-screen text-[var(--text)]">
+      <OfflineNotice />
       <Sidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}

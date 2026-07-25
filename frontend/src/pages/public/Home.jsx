@@ -8,7 +8,7 @@
  * =====================================================
  */
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -24,7 +24,6 @@ import {
   Award,
   ArrowRight,
   Mail,
-  PlayCircle,
 } from "lucide-react";
 
 import { getServices } from "../../api/services/serviceApi";
@@ -36,7 +35,6 @@ import { getGalleryItems } from "../../api/gallery/galleryApi";
 import { getBlogs } from "../../api/blog/blogApi";
 
 import PageLoader from "../../components/loaders/PageLoader";
-import ErrorMessage from "../../components/common/ErrorMessage";
 import LazyImage from "../../components/common/LazyImage";
 import { useOrganization } from "../../contexts/OrganizationContext";
 import heroBg from "../../assets/blue.jpeg";
@@ -66,8 +64,6 @@ const containerVariants = {
 };
 
 const Home = () => {
-  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
-
   // SEO Meta Tags
   useEffect(() => {
     document.title =
@@ -140,8 +136,6 @@ const Home = () => {
   const team = teamData?.data || [];
   const gallery = galleryData?.data || [];
   const blogs = blogData?.data || [];
-
-  
 
   const heroBackgroundImage = `linear-gradient(135deg, rgba(3, 37, 76, 0.36), rgba(30, 64, 175, 0.22)), url('${heroUser}')`;
 
@@ -220,32 +214,6 @@ const Home = () => {
     },
   ];
 
-  const isHostedVideoUrl = (value) =>
-    /\.(mp4|mov|webm|ogg|m4v)$/i.test(value || "") || /\/video\//i.test(value || "") || /cloudinary.*\/video\//i.test(value || "");
-
-  const ghanaStories = [
-    {
-      title: organization?.storyTitle || "Stories from Ghana",
-      summary: organization?.storySubtitle || "Short visual stories from communities we serve across Ghana.",
-      image: "https://images.pexels.com/photos/7974372/pexels-photo-7974372.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
-      videoUrl: organization?.storyVideoOne || "https://www.youtube.com/embed/ScMzIvxBSi4",
-    },
-    {
-      title: "Learning Beyond the Classroom",
-      summary:
-        "Watch how literacy programmes and school support are helping children thrive in Ghana.",
-      image: "https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
-      videoUrl: organization?.storyVideoTwo || "https://www.youtube.com/embed/2Vv-BfVoq4g",
-    },
-    {
-      title: "Women Building Livelihoods",
-      summary:
-        "Discover how women’s cooperatives are creating businesses and stronger futures across Ghana.",
-      image: "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop",
-      videoUrl: organization?.storyVideoThree || "https://www.youtube.com/embed/aqz-KE-bpKQ",
-    },
-  ];
-
   return (
     <div className="overflow-hidden">
       {/* ========================================= */}
@@ -262,8 +230,9 @@ const Home = () => {
           backgroundSize: "cover",
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
-          height: "95.5vh",
+          height: "95.5vh", 
         }}
+        
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -758,84 +727,6 @@ const Home = () => {
         </motion.section>
       )}
 
-      {/* ========================================= */}
-      {/* GHANA STORIES VIDEOS */}
-      {/* ========================================= */}
-
-      <motion.section
-        className="py-20 md:py-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {organization?.storyTitle || "Stories from Ghana"}
-            </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              {organization?.storySubtitle || "Short visual stories from communities we serve across Ghana."}
-            </p>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {ghanaStories.map((story, index) => (
-              <motion.div
-                key={story.title}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="aspect-video bg-gray-100">
-                  {isHostedVideoUrl(story.videoUrl) ? (
-                    <video
-                      controls
-                      src={story.videoUrl}
-                      className="w-full h-full object-cover"
-                      preload="metadata"
-                    />
-                  ) : (
-                    <iframe
-                      src={story.videoUrl}
-                      title={story.title}
-                      className="w-full h-full"
-                      loading="lazy"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  )}
-                </div>
-                <div className="p-8">
-                  <div className="flex items-center text-sm text-emerald-700 font-semibold mb-3">
-                    <PlayCircle className="mr-2" size={16} />
-                    Featured video story
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {story.title}
-                  </h3>
-                  <p className="text-gray-600 mb-6">{story.summary}</p>
-                  <Link
-                    to="/blog"
-                    className="inline-flex items-center text-blue-700 font-semibold hover:text-blue-800 transition"
-                  >
-                    Read more stories
-                    <ArrowRight className="ml-2" size={18} />
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
 
       {/* ========================================= */}
       {/* GALLERY PREVIEW */}
@@ -1241,7 +1132,6 @@ const Home = () => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  setIsNewsletterOpen(false);
                   // Handle newsletter signup here
                 }}
                 className="flex flex-col sm:flex-row gap-4"

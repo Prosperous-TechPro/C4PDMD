@@ -30,6 +30,7 @@ const PartnerForm = ({
   });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormData({
       name: initialData.name || "",
       logo: initialData.logo || "",

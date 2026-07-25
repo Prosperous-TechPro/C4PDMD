@@ -7,15 +7,14 @@
  * =====================================================
  */
 
-import { createContext, useContext, useEffect, useState } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getSettings } from "../api/settings/settingsApi";
 
 const OrganizationContext = createContext();
 
 export const OrganizationProvider = ({ children }) => {
-  const [orgData, setOrgData] = useState(null);
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["organization-settings"],
     queryFn: getSettings,
@@ -26,16 +25,10 @@ export const OrganizationProvider = ({ children }) => {
     refetchOnMount: true,
   });
 
-  useEffect(() => {
-    if (data?.data) {
-      setOrgData(data.data);
-    }
-  }, [data]);
-
   return (
     <OrganizationContext.Provider
       value={{
-        organization: orgData,
+        organization: data?.data || null,
         isLoading,
         error,
       }}
@@ -45,6 +38,8 @@ export const OrganizationProvider = ({ children }) => {
   );
 };
 
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react-refresh/only-export-components */
 export const useOrganization = () => {
   const context = useContext(OrganizationContext);
   if (!context) {

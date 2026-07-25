@@ -11,8 +11,9 @@ import {
 import {
   Menu,
   X,
-  User,
 } from "lucide-react";
+
+import InstallAppButton from "../pwa/InstallAppButton";
 
 const Navbar = ({ toggleMenu, mobileOpen }) => {
 
@@ -35,6 +36,10 @@ const Navbar = ({ toggleMenu, mobileOpen }) => {
               <p className="text-xs text-[var(--text-muted)]">Center for Prim-Data Measurement & Development</p>
             </div>
           </Link>
+
+          <div className="hidden items-center gap-3 md:flex">
+            <InstallAppButton />
+          </div>
 
           {/* Menu Button */}
 

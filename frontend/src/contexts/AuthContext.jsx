@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /**
  * =====================================================
  * AUTH CONTEXT
@@ -73,7 +74,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("token");
       if (storedUser && token) return normalizeUser(JSON.parse(storedUser));
       return null;
-    } catch (e) {
+    } catch {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
       return null;
@@ -112,7 +113,7 @@ export const AuthProvider = ({ children }) => {
 
       setUser(null);
       return null;
-    } catch (error) {
+    } catch {
       setUser(null);
       return null;
     } finally {

@@ -19,7 +19,7 @@ const ResetPassword = () => {
 
   const mutation = useMutation({
     mutationFn: resetPassword,
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success("Password reset successfully.");
       navigate("/login");
     },

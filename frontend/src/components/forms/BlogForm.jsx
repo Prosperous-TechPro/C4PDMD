@@ -3,12 +3,12 @@ import { uploadImage } from "../../api/uploadApi/uploadApi";
 import RichTextEditor from "./RichTextEditor";
 
 const BlogForm = ({ onSubmit = () => {}, initialData = {}, loading = false, categories = [] }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(() => ({
     title: initialData.title || "",
     content: initialData.content || "",
     status: initialData.status || "PUBLISHED",
     categoryId: initialData.categoryId || categories[0]?.id || "",
-  });
+  }));
   const [mediaItems, setMediaItems] = useState(
     initialData.media || []
   );
@@ -18,6 +18,7 @@ const BlogForm = ({ onSubmit = () => {}, initialData = {}, loading = false, cate
 
   useEffect(() => {
     if (!formData.categoryId && categories[0]?.id) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData((prev) => ({ ...prev, categoryId: categories[0].id }));
     }
   }, [categories, formData.categoryId]);

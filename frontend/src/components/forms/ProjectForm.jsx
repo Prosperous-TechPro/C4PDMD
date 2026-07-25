@@ -3,16 +3,17 @@ import { useEffect, useState } from "react";
 import ImageUpload from "./ImageUpload";
 
 const ProjectForm = ({ onSubmit = () => {}, initialData = {}, loading = false, categories = [] }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(() => ({
     title: initialData.title || "",
     description: initialData.description || "",
     image: initialData.image || "",
     status: initialData.status || "ACTIVE",
     categoryId: initialData.categoryId || categories[0]?.id || "",
-  });
+  }));
 
   useEffect(() => {
     if (!formData.categoryId && categories[0]?.id) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData((prev) => ({ ...prev, categoryId: categories[0].id }));
     }
   }, [categories, formData.categoryId]);

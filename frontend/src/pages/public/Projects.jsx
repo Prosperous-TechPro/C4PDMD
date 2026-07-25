@@ -18,13 +18,6 @@ import PageLoader from "../../components/loaders/PageLoader";
 import ErrorMessage from "../../components/common/ErrorMessage";
 import LazyImage from "../../components/common/LazyImage";
 
-// Animation variants
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 },
-};
-
 const Projects = () => {
   // SEO Meta Tags
   useEffect(() => {

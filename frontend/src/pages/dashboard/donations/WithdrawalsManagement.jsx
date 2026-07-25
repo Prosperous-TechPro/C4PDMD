@@ -94,12 +94,11 @@ const WithdrawalsManagement = () => {
     }
   };
 
+  const movements = movementsData?.data || [];
+  const [now] = useState(() => Date.now());
+
   if (isLoading) return <PageLoader />;
   if (error) return <ErrorMessage message="Failed to load withdrawals." />;
-
-  const movements = movementsData?.data || [];
-
-  const now = Date.now();
 
   return (
     <div className="space-y-6">

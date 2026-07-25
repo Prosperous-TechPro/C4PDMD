@@ -9,17 +9,10 @@ const FloatingDonateWidget = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [autoDisabled, setAutoDisabled] = useState(false);
-  const [isReady, setIsReady] = useState(false);
+  const [autoDisabled, setAutoDisabled] = useState(() => sessionStorage.getItem(STORAGE_KEY) === "true");
 
   useEffect(() => {
-    const dismissed = sessionStorage.getItem(STORAGE_KEY) === "true";
-    setAutoDisabled(dismissed);
-    setIsReady(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isReady || autoDisabled) return;
+    if (autoDisabled) return;
 
     const handleScroll = () => {
       if (isExpanded) return;
@@ -43,7 +36,7 @@ const FloatingDonateWidget = () => {
       window.clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [autoDisabled, isExpanded, isReady]);
+  }, [autoDisabled, isExpanded]);
 
   const handleMaybeLater = () => {
     sessionStorage.setItem(STORAGE_KEY, "true");

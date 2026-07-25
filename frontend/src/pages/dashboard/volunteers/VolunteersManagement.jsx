@@ -26,7 +26,6 @@ import toast from "react-hot-toast";
 
 import {
   getVolunteers,
-  updateVolunteer,
   deleteVolunteer,
 } from "../../../api/volunteers/volunteerApi";
 
@@ -80,18 +79,6 @@ const VolunteersManagement = () => {
    * UPDATE
    * =====================================================
    */
-
-  // Update mutation is currently unused in UI — keep implementation here for future use
-  const updateMutation = useMutation({
-    mutationFn: ({ id, data }) => updateVolunteer(id, data),
-    onSuccess: () => {
-      toast.success("Volunteer updated successfully.");
-      queryClient.invalidateQueries({ queryKey: ["volunteers"] });
-    },
-    onError: (error) => {
-      toast.error(error.message || "Failed to update volunteer.");
-    },
-  });
 
   /**
    * =====================================================

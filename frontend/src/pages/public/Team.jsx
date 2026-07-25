@@ -14,7 +14,6 @@ import {
   X,
   Mail,
   Phone,
-  Globe,
   MapPin,
   Briefcase,
 } from "lucide-react";
@@ -24,13 +23,6 @@ import { getTeamMembers } from "../../api/team/teamApi";
 import PageLoader from "../../components/loaders/PageLoader";
 import ErrorMessage from "../../components/common/ErrorMessage";
 import LazyImage from "../../components/common/LazyImage";
-
-// Animation variants
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 },
-};
 
 const Team = () => {
   // SEO Meta Tags
@@ -75,13 +67,6 @@ const Team = () => {
       biography.toLowerCase().includes(search.toLowerCase())
     );
   });
-
-  // Get unique departments
-  const departments = [
-    ...new Set(
-      members.map((m) => m.department).filter(Boolean)
-    ),
-  ];
 
   return (
     <div className="overflow-hidden">

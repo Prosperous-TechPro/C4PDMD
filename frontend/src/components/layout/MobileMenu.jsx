@@ -8,6 +8,8 @@
 
 import { Link } from "react-router-dom";
 
+import InstallAppButton from "../pwa/InstallAppButton";
+
 import {
   X,
   Home,
@@ -19,7 +21,6 @@ import {
   Image,
   Mail,
   HeartHandshake,
-  CircleDollarSign,
   User,
   Handshake,
   MessageCircle,
@@ -52,11 +53,6 @@ const menuItems = [
     title: "Home",
     path: "/",
     icon: Home,
-  },
-  {
-    title: "Login",
-    path: "/login",
-    icon: User,
   },
   {
     title: "Partners",
@@ -199,6 +195,11 @@ const MobileMenu = ({
         {/* Action Buttons */}
 
         <div className="border-t border-[var(--border)] p-6 space-y-3">
+
+          {/* Install App Button */}
+          <div className="w-full">
+            <InstallAppButton />
+          </div>
 
           {/* Donate Button */}
           <Link

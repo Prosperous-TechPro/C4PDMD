@@ -13,6 +13,7 @@ import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import MobileMenu from "../components/layout/MobileMenu";
 import FloatingDonateWidget from "../components/layout/FloatingDonateWidget";
+import OfflineNotice from "../components/pwa/OfflineNotice";
 
 const PublicLayout = () => {
 
@@ -38,6 +39,8 @@ const PublicLayout = () => {
   return (
 
     <div className="app-page flex min-h-screen flex-col overflow-x-hidden text-[var(--text)]">
+
+      <OfflineNotice />
 
       {/* Navbar */}
 

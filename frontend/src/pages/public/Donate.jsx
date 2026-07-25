@@ -85,10 +85,7 @@ const Donate = () => {
       mutationFn:
         verifyDonationPayment,
 
-      onSuccess: (response) => {
-        const donation =
-          response?.data;
-
+      onSuccess: () => {
         toast.success(
           "Thank you for supporting C4PDMD! God bless you"
         );
