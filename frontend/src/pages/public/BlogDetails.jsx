@@ -13,7 +13,6 @@ import {
   Calendar,
   ArrowLeft,
   Share2,
-  Tag,
 } from "lucide-react";
 
 import {
@@ -166,19 +165,6 @@ const BlogDetails = () => {
                     : "-"}
 
                 </div>
-
-                {blog?.category && (
-                  <div className="flex items-center gap-2">
-
-                    <Tag size={18} />
-
-                    {
-                      blog.category
-                        .name
-                    }
-
-                  </div>
-                )}
 
               </div>
 

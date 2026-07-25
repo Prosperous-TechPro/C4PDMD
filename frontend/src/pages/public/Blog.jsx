@@ -291,13 +291,6 @@ const Blog = () => {
 
                   {/* Blog Content */}
                   <div className="p-6 flex flex-col flex-grow">
-                    {/* Category Tag */}
-                    {blog.category && (
-                      <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold mb-4 w-fit">
-                        {blog.category.name}
-                      </span>
-                    )}
-
                     {/* Title */}
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-green-700 transition">
                       {blog.title}
