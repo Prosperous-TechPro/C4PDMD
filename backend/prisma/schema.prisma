@@ -308,6 +308,15 @@ model ContactMessage {
   updatedAt DateTime @updatedAt
 }
 
+model NewsletterSubscriber {
+  id      Int     @id @default(autoincrement())
+  email   String  @unique
+  status  String  @default("SUBSCRIBED")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // ======================================================
 // ORGANIZATION SETTINGS
 // ======================================================

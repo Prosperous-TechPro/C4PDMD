@@ -8,10 +8,11 @@
  * =====================================================
  */
 
-import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 
 // Icons
@@ -37,6 +38,7 @@ import { getBlogs } from "../../api/blog/blogApi";
 import PageLoader from "../../components/loaders/PageLoader";
 import LazyImage from "../../components/common/LazyImage";
 import { useOrganization } from "../../contexts/OrganizationContext";
+import { subscribeNewsletter } from "../../api/newsletter/newsletterApi";
 import heroBg from "../../assets/blue.jpeg";
 import heroUser from "../../assets/blue.jpeg";
 import volunteerBg from "../../assets/images/green.jpeg";
@@ -79,6 +81,46 @@ const Home = () => {
 
   // Fetch organization settings
   const { organization } = useOrganization();
+  const [subscriberEmail, setSubscriberEmail] = useState("");
+
+  const newsletterMutation = useMutation({
+    mutationFn: subscribeNewsletter,
+    onSuccess: () => {
+      toast.success("Subscribed successfully. You'll receive updates soon.");
+      setSubscriberEmail("");
+    },
+    onError: (error) => {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Unable to subscribe at this time. Please try again."
+      );
+    },
+  });
+
+  const handleSubscriptionSubmit = (event) => {
+    event.preventDefault();
+
+    if (!subscriberEmail.trim()) {
+      toast.error("Please enter your email address.");
+      return;
+    }
+
+    const normalizedEmail = subscriberEmail.trim().toLowerCase();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(normalizedEmail)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (!normalizedEmail.endsWith("@gmail.com")) {
+      toast.error("Please subscribe using a Gmail address.");
+      return;
+    }
+
+    newsletterMutation.mutate({ email: normalizedEmail });
+  };
 
   // Fetch all data
   const { data: servicesData, isLoading: servicesLoading } = useQuery({
@@ -1130,24 +1172,24 @@ const Home = () => {
               </p>
 
               <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  // Handle newsletter signup here
-                }}
+                onSubmit={handleSubscriptionSubmit}
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <input
                   type="email"
+                  value={subscriberEmail}
+                  onChange={(e) => setSubscriberEmail(e.target.value)}
                   placeholder="Enter your email"
                   className="flex-1 px-6 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                   required
                 />
                 <button
                   type="submit"
-                  className="bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-all duration-300 flex items-center justify-center"
+                  disabled={newsletterMutation.isLoading}
+                  className="bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-all duration-300 flex items-center justify-center disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <Mail className="mr-2" size={20} />
-                  Subscribe
+                  {newsletterMutation.isLoading ? "Subscribing..." : "Subscribe"}
                 </button>
               </form>
 
