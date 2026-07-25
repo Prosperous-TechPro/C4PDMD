@@ -10,6 +10,7 @@
  */
 
 const newsletterService = require("../services/newsletterService");
+const { sendNewsletterConfirmation } = require("../services/emailService");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -43,6 +44,12 @@ const createSubscriber = async (req, res) => {
     const subscriber = await newsletterService.createSubscriber({
       email: trimmedEmail,
     });
+
+    try {
+      await sendNewsletterConfirmation(trimmedEmail);
+    } catch (emailError) {
+      console.error("NEWSLETTER CONFIRMATION EMAIL ERROR:", emailError);
+    }
 
     return res.status(201).json({
       success: true,
