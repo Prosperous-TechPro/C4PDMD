@@ -9,6 +9,7 @@
 import { Link } from "react-router-dom";
 
 import InstallAppButton from "../pwa/InstallAppButton";
+import { useAuth } from "../../contexts/AuthContext";
 
 import {
   X,
@@ -26,6 +27,7 @@ import {
   MessageCircle,
   Heart,
   Phone,
+  LogOut,
 } from "lucide-react";
 
 const menuItems = [
@@ -92,6 +94,7 @@ const MobileMenu = ({
   isOpen,
   closeMenu,
 }) => {
+  const { user, logout } = useAuth();
 
   if (!isOpen) return null;
 
@@ -113,7 +116,7 @@ const MobileMenu = ({
         className="
           fixed
           top-0
-          right-0
+          left-0
           w-full
           max-w-xs
           h-screen
@@ -194,12 +197,27 @@ const MobileMenu = ({
 
         {/* Action Buttons */}
 
-        <div className="border-t border-[var(--border)] p-6 space-y-3">
+          <div className="border-t border-[var(--border)] p-6 space-y-3">
 
           {/* Install App Button */}
           <div className="w-full">
             <InstallAppButton />
           </div>
+
+          {/* Logout for authenticated users */}
+          {user && (
+            <button
+              onClick={() => {
+                logout();
+                closeMenu();
+                window.location.href = "/";
+              }}
+              className="w-full flex items-center justify-center gap-2 border border-red-600 text-red-600 px-4 py-3 rounded-lg font-semibold hover:bg-red-50 transition"
+            >
+              <LogOut size={18} />
+              Logout
+            </button>
+          )}
 
           {/* Donate Button */}
           <Link

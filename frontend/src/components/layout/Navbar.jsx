@@ -14,13 +14,26 @@ import {
 } from "lucide-react";
 
 import InstallAppButton from "../pwa/InstallAppButton";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Navbar = ({ toggleMenu, mobileOpen }) => {
+  const { user, logout } = useAuth();
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur shadow-sm">
 
       <div className="app-container h-20 flex items-center justify-between gap-4">
+
+          {/* Menu Button */}
+
+          <button
+            aria-label={mobileOpen ? "Close navigation drawer" : "Open navigation drawer"}
+            aria-expanded={mobileOpen}
+            onClick={toggleMenu}
+            className="rounded-full border border-[var(--border)] p-2 text-[var(--text)] transition hover:border-[var(--primary)] hover:bg-[rgba(17,77,134,0.06)]"
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
 
           {/* Logo */}
 
@@ -39,18 +52,20 @@ const Navbar = ({ toggleMenu, mobileOpen }) => {
 
           <div className="hidden items-center gap-3 md:flex">
             <InstallAppButton />
+            {/* Logout button for authenticated users */}
+            {user && (
+              <button
+                type="button"
+                onClick={() => {
+                  logout();
+                  window.location.href = "/";
+                }}
+                className="ml-2 inline-flex items-center justify-center rounded-full border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] transition hover:bg-[rgba(17,77,134,0.06)]"
+              >
+                Logout
+              </button>
+            )}
           </div>
-
-          {/* Menu Button */}
-
-          <button
-            aria-label={mobileOpen ? "Close navigation drawer" : "Open navigation drawer"}
-            aria-expanded={mobileOpen}
-            onClick={toggleMenu}
-            className="rounded-full border border-[var(--border)] p-2 text-[var(--text)] transition hover:border-[var(--primary)] hover:bg-[rgba(17,77,134,0.06)]"
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
 
       </div>
 

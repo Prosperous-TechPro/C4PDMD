@@ -1,4 +1,5 @@
 import { usePWAInstall } from "../../hooks/usePWAInstall";
+import toast from "react-hot-toast";
 
 const InstallAppButton = () => {
   const {
@@ -18,7 +19,18 @@ const InstallAppButton = () => {
     <div className="space-y-3">
       <button
         type="button"
-        onClick={promptInstall}
+        onClick={async () => {
+          const result = await promptInstall();
+          if (result?.status === "accepted") {
+            toast.success("App installed — enjoy the PWA!");
+          } else if (result?.status === "dismissed") {
+            toast("Install dismissed");
+          } else if (result?.status === "ios") {
+            toast("Follow the instructions to add to Home Screen on iOS.");
+          } else if (result?.status === "no-prompt") {
+            toast("Use your browser menu to install the app.");
+          }
+        }}
         className="inline-flex items-center justify-center rounded-full bg-[#0057B8] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/10 transition hover:bg-[#003f8a]"
       >
         Install App

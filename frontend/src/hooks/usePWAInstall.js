@@ -58,30 +58,38 @@ export const usePWAInstall = () => {
 
   const promptInstall = async () => {
     if (isInstalled) {
-      return;
+      return { status: "already-installed" };
     }
 
     if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
+      try {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
 
-      if (outcome === "accepted") {
-        setIsInstalled(true);
-        setIsInstallable(false);
+        if (outcome === "accepted") {
+          setIsInstalled(true);
+          setIsInstallable(false);
+          setDeferredPrompt(null);
+          setShowIosInstructions(false);
+          setShowGenericInstructions(false);
+          return { status: "accepted" };
+        }
+
+        setDeferredPrompt(null);
+        return { status: "dismissed" };
+      } catch (err) {
+        setDeferredPrompt(null);
+        return { status: "error", error: err };
       }
-
-      setDeferredPrompt(null);
-      setShowIosInstructions(false);
-      setShowGenericInstructions(false);
-      return;
     }
 
     if (isIos()) {
       setShowIosInstructions(true);
-      return;
+      return { status: "ios" };
     }
 
     setShowGenericInstructions(true);
+    return { status: "no-prompt" };
   };
 
   const hideInstallInstructions = () => {
